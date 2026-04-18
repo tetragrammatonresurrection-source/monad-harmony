@@ -8,8 +8,7 @@
     <!-- Ikona (favicon) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌑</text></svg>">
 
-    <!-- Meta oznake za deljenje -->
-    <meta property="og:image" content="https://github.io">
+    <!-- Meta oznake za deljenje (Facebook, Messenger, WhatsApp) -->
     <meta property="og:title" content="Monad Harmony | Brezplačna uglasitev">
     <meta property="og:description" content="Izračunajte svoja lunarna leta in se potopite v terapevtske frekvence s kromoterapijo.">
     <meta property="og:type" content="website">
@@ -79,6 +78,7 @@
             font-weight: bold; 
             border-radius: 12px;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         #info { 
@@ -103,6 +103,7 @@
 
         @media (max-width: 450px) {
             .grid { grid-template-columns: 1fr 1fr; }
+            h1 { font-size: 1.5em; }
         }
     </style>
 </head>
@@ -179,6 +180,7 @@
 
     function izracunaj() {
         const d = new Date(document.getElementById('datum').value);
+        if(isNaN(d)) return;
         const danes = new Date();
         const razlikaDni = Math.floor((danes - d) / (1000 * 60 * 60 * 24));
         document.getElementById('r1').innerText = (razlikaDni / 354.37).toFixed(1);
@@ -206,6 +208,5 @@
         window.URL.revokeObjectURL(url);
     }
 </script>
-
 </body>
 </html>

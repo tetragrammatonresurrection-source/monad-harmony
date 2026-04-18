@@ -2,242 +2,310 @@
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monad Harmony | Holistična Seansa</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌑</text></svg>">
+    <!-- VARNOSTNA ZAPORA (CSP): Preprečuje vse zunanje klice in naloži le vdelano vsebino -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none';">
     
-    <meta property="og:title" content="Monad Harmony | Brezplačna uglasitev">
-    <meta property="og:description" content="Izračunajte svoja lunarna leta in se potopite v terapevtske frekvence s kromoterapijo.">
-    <meta property="og:type" content="website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Monad Harmony</title>
     <meta property="og:url" content="https://github.io">
     <meta property="og:image" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
+    <!-- PWA Nastavitve -->
+    <meta name="theme-color" content="#05070a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2305070a' stroke='%23d4af37' stroke-width='5'/><circle cx='50' cy='50' r='20' fill='%23d4af37'/></svg>">
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22MonadHarmony%22,%22short_name%22:%22Monad%22,%22display%22:%22standalone%22,%22background_color%22:%22#05070a%22,%22theme_color%22:%22#d4af37%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2305070a' stroke='%23d4af37' stroke-width='5'/><circle cx='50' cy='50' r='20' fill='%23d4af37'/></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
+
     <style>
-        :root { --gold: #d4af37; }
+        :root { --gold: #d4af37; --faza-color: rgba(214, 175, 55, 0.4); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body { 
             background: #05070a; color: var(--gold); font-family: 'Georgia', serif; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 100vh; margin: 0; overflow-x: hidden; transition: background 2.5s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            min-height: 100vh; margin: 0; padding: 40px 0; overflow-x: hidden;
+            scrollbar-width: none; -ms-overflow-style: none; transition: background 1.5s ease;
         }
+        body::-webkit-scrollbar { display: none; }
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         .box { 
-            /* Močno povečana prosojnost za boljši učinek kromoterapije */
-            background: rgba(10, 15, 25, 0.4); 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(214, 175, 55, 0.4); 
-            padding: 30px; border-radius: 24px; 
+            background: rgba(10, 15, 25, 0.45); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(214, 175, 55, 0.4); padding: 30px; border-radius: 24px; 
             max-width: 650px; width: 92%; text-align: center; 
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-            z-index: 10; margin: 20px 0;
-            transition: border 1s ease;
+            box-shadow: 0 0 60px -15px var(--faza-color);
+            z-index: 10; margin: 20px auto; transition: all 1s ease;
         }
 
-        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-        .breath-wrap { margin: 20px 0; display: none; }
-        .circle {
-            width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 50%;
-            margin: 0 auto; animation: breathe 8s infinite ease-in-out;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
-        }
-        @keyframes breathe {
-            0%, 100% { transform: scale(0.75); opacity: 0.2; }
-            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 50px var(--gold); }
-        }
+        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; }
+        .quote { font-size: 0.85em; font-style: italic; opacity: 0.7; margin: 5px 0 20px 0; letter-spacing: 1px; }
+
+        .timer-container { margin: 10px 0; font-size: 0.8em; opacity: 0.9; }
+        .tempo-btns { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        
+        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 10px; border-radius: 8px; font-size: 0.7em; cursor: pointer; transition: 0.3s; }
+        .t-btn.active { border-color: var(--gold); background: rgba(214,175,55,0.2); box-shadow: 0 0 10px var(--faza-color); }
+
+        .breath-wrap { margin: 25px 0; display: none; }
+        .circle { width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        #breath-text { font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+
+        @keyframes breathe { 0%, 100% { transform: scale(0.75); opacity: 0.2; } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 60px var(--gold); } }
+        @keyframes textFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .f-btn { 
-            padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.15); 
-            border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.9em;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .f-btn:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.03); }
-
-        .timer-btn { background: rgba(0,0,0,0.3); border: 1px solid var(--gold); color: var(--gold); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin: 4px; font-size: 0.8em; }
-        #afirmacija { font-style: italic; min-height: 45px; margin: 15px 0; color: #fff; font-size: 1.15em; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+        .f-btn { padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.85em; background: rgba(255, 255, 255, 0.05); }
         
-        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; line-height: 1.6; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; color: #fff; }
-        .info-content { display: none; margin-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 10px; color: #eee; }
+        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 25px var(--gold); transform: scale(1.05); border-color: #fff; } }
+        .suggested { animation: suggested-glow 1.5s infinite ease-in-out; border: 2px solid var(--gold) !important; z-index: 15; }
 
-        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ff4444; cursor: pointer; font-weight: bold; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        input { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 65%; font-size: 1em; text-align: center; }
-        .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 22px; border-radius: 10px; border: none; cursor: pointer; transition: 0.3s; }
-        .calc-btn:hover { background: #fff; transform: translateY(-2px); }
+        input[type="date"] { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 220px; text-align: center; }
+        .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; margin-top: 15px; }
 
-        .sig { margin-top: 30px; font-size: 0.75em; opacity: 0.6; letter-spacing: 4px; font-weight: bold; text-shadow: 1px 1px 2px #000; }
-        #faza-box { background: rgba(212, 175, 55, 0.15); padding: 18px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 18px 0; display: none; text-align: left; backdrop-filter: blur(5px);}
+        #faza-box { background: rgba(212, 175, 55, 0.1); padding: 25px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 20px 0; display: none; text-align: left; backdrop-filter: blur(5px); }
         
-        @media (max-width: 450px) { .grid { grid-template-columns: 1fr 1fr; } h1 { font-size: 1.5em; } }
+        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; display: block; color: #fff; }
+        .info-content { display: none; margin-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 10px; color: #eee; line-height: 1.6; }
+
+        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ff4444; cursor: pointer; margin-top: 15px; display: none; font-weight: bold; }
     </style>
 </head>
-<body>
+<body onload="checkSavedData()">
 
 <canvas id="particles"></canvas>
 
-<div class="box">
+<div class="box" id="main-box">
     <h1>Monad Harmony</h1>
-    <p style="font-size: 0.85em; font-style: italic; opacity: 0.8; margin-top: -5px; text-shadow: 1px 1px 2px #000;">"Vse je številka. Vse je resonanca."</p>
+    <div class="quote">"Vse je številka. Vse je resonanca."</div>
     
-    <div id="timer-display" style="font-size: 0.85em; opacity: 0.8; margin-top: 20px;">Nastavi dolžino seanse:</div>
-    <div class="timer-controls">
-        <button class="timer-btn" onclick="setTimer(5)">5 min</button>
-        <button class="timer-btn" onclick="setTimer(15)">15 min</button>
-        <button class="timer-btn" onclick="setTimer(30)">30 min</button>
-        <button class="timer-btn" onclick="setTimer(0)">∞ Reset</button>
+    <div class="timer-container">
+        <label>Trajanje seanse:</label>
+        <div class="tempo-btns">
+            <button class="t-btn" id="dur5" onclick="setDuration(5)">5 min</button>
+            <button class="t-btn" id="dur10" onclick="setDuration(10)">10 min</button>
+            <button class="t-btn" id="dur15" onclick="setDuration(15)">15 min</button>
+            <button class="t-btn" id="dur20" onclick="setDuration(20)">20 min</button>
+        </div>
+    </div>
+
+    <div class="tempo-container" id="tempoUI">
+        <div class="tempo-btns">
+            <button class="t-btn" id="t8" onclick="setTempo(8)">SPROŠČENO (8s)</button>
+            <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONIJA (10s)</button>
+            <button class="t-btn" id="t12" onclick="setTempo(12)">GLOBOKO (12s)</button>
+        </div>
     </div>
 
     <div class="breath-wrap" id="breathUI">
-        <div class="circle"></div>
-        <p style="font-size: 0.9em; margin-top: 20px; letter-spacing: 3px; font-weight: bold; text-shadow: 1px 1px 3px #000;">VDIH ... IZDIH</p>
+        <div class="circle" id="mainCircle">
+            <span id="breath-text">Vdih</span>
+        </div>
+        <div id="remaining-time" style="margin-top: 15px; font-size: 0.85em; opacity: 0.8; font-weight: bold;"></div>
     </div>
 
-    <div id="afirmacija">Izberite frekvenco za pričetek uglasitve.</div>
+    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 45px;">Izberite frekvenco ali izračunajte uglasitev.</div>
 
     <div class="grid">
-        <button class="f-btn" style="background: rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost in mir. Bolečina odteka.', '#0a0a1a')">174 Hz</button>
-        <button class="f-btn" style="background: rgba(120,70,0,0.6)" onclick="igraj(285, 'Regeneracija in obnova polja.', '#1a1200')">285 Hz</button>
-        <button class="f-btn" style="background: rgba(180,0,0,0.6)" onclick="igraj(396, 'Sem svoboden strahu in krivde.', '#350000')">396 Hz</button>
-        <button class="f-btn" style="background: rgba(210,130,0,0.6); color:#fff" onclick="igraj(417, 'Odpravljam staro, sprejemam novo.', '#351d00')">417 Hz</button>
-        <button class="f-btn" style="background: rgba(75,75,75,0.6)" onclick="igraj(432, 'Sem v harmoniji z naravo.', '#121a12')">432 Hz</button>
-        <button class="f-btn" style="background: rgba(0,120,0,0.6)" onclick="igraj(528, 'Ljubezen in čudeži me prežemajo.', '#002500')">528 Hz</button>
-        <button class="f-btn" style="background: rgba(0,90,140,0.6)" onclick="igraj(639, 'Harmonija v mojih odnosih.', '#001825')">639 Hz</button>
-        <button class="f-btn" style="background: rgba(0,0,160,0.6)" onclick="igraj(741, 'Moja beseda je resnica.', '#000040')">741 Hz</button>
-        <button class="f-btn" style="background: rgba(100,0,160,0.6)" onclick="igraj(852, 'Moja intuicija je jasna.', '#200035')">852 Hz</button>
-        <button class="f-btn" style="background: rgba(160,0,160,0.6)" onclick="igraj(963, 'Sem eno z Izvorom.', '#350035')">963 Hz</button>
+        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost in mir.', '#0a0a1a')">174 Hz</button>
+        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Obnova polja.', '#1a1200')">285 Hz</button>
+        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Brez strahu.', '#350000')">396 Hz</button>
+        <button id="btn417" class="f-btn" style="background:rgba(210,130,0,0.6)" onclick="igraj(417, 'Sprememba.', '#351d00')">417 Hz</button>
+        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Harmonija.', '#121a12')">432 Hz</button>
+        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'Čudeži.', '#002500')">528 Hz</button>
+        <button id="btn639" class="f-btn" style="background:rgba(0,90,140,0.6)" onclick="igraj(639, 'Odnosi.', '#001825')">639 Hz</button>
+        <button id="btn741" class="f-btn" style="background:rgba(0,0,160,0.6)" onclick="igraj(741, 'Resnica.', '#000040')">741 Hz</button>
+        <button id="btn852" class="f-btn" style="background:rgba(100,0,160,0.6)" onclick="igraj(852, 'Intuicija.', '#200035')">852 Hz</button>
+        <button id="btn963" class="f-btn" style="background:rgba(160,0,160,0.6)" onclick="igraj(963, 'Enost.', '#350035')">963 Hz</button>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <input type="date" id="datum" value="1975-11-21">
+        <button class="calc-btn" onclick="izracunajVse()">UGLASI ME</button>
+    </div>
+
+    <div id="faza-box"></div>
+
+    <div class="info-section">
+        <span class="info-title" onclick="toggleInfo('num-info')">▼ Numerologija Bioloških Ciklov</span>
+        <div id="num-info" class="info-content">
+            Vse v naravi niha v devetih fazah. Vaša <b>biološka faza</b> temelji na teozofski redukciji datuma. <br><br>
+            <b>Lunarna starost</b> upošteva lunarne cikle (354 dni), <b>Cikli prenove</b> pa beležijo vsako polno lunacijo (29.53 dni) od vašega rojstva.
+        </div>
     </div>
 
     <div class="info-section">
         <span class="info-title" onclick="toggleInfo('freq-info')">▼ Pomen Solfeggio Frekvenc</span>
         <div id="freq-info" class="info-content">
-            <p>• 174 Hz: Varnost. • 285 Hz: Obnova tkiv. • 396 Hz: Osvobajanje strahu. • 417 Hz: Spremembe. • 432 Hz: Mir narave. • 528 Hz: Ljubezen in DNK. • 639 Hz: Odnosi. • 741 Hz: Čiščenje celic. • 852 Hz: Intuicija. • 963 Hz: Božanska enost.</p>
+            • 174 Hz: Mir. • 285 Hz: Obnova. • 396 Hz: Strah. • 417 Hz: Sprememba. • 432 Hz: Narava. • 528 Hz: DNK. • 639 Hz: Odnosi. • 741 Hz: Celice. • 852 Hz: Intuicija. • 963 Hz: Zavest.
         </div>
     </div>
 
-    <div style="margin: 35px 0;">
-        <input type="date" id="datum" value="1975-11-21">
-        <button class="calc-btn" onclick="izracunaj()">UGLASI ME</button>
-    </div>
-
-    <div id="rezultat" style="display:none; text-align: left; font-size: 1em; border-top: 1px solid rgba(212,175,55,0.3); padding-top: 20px;">
-        <div id="faza-box">
-            <h3 style="margin-top:0; color:#fff; letter-spacing:1px;">TRENUTNA FAZA: <span id="faza-num"></span></h3>
-            <p id="faza-text" style="line-height:1.5; color:#eee;"></p>
-        </div>
-        
-        <p>• Lunarna starost: <b id="r1"></b> let</p>
-        <p>• Cikli biološke prenove (266 dni): <b id="r2"></b></p>
-        <p>• Naslednji izvorni reset: <b id="r3"></b></p>
-        
-        <div class="info-section">
-            <span class="info-title" onclick="toggleInfo('num-info')">▼ Numerološki Cikel (1-9)</span>
-            <div id="num-info" class="info-content">
-                <p>1-Spočetje. 2-Inkubacija. 3-Ekspresija. 4-Struktura. 5-Ekspanzija. 6-Harmonija. 7-Resnica. 8-Manifestacija. 9-Modrost.</p>
-            </div>
-        </div>
-    </div>
-
-    <button class="stop" onclick="ustavi()">USTAVI SEANSO</button>
-    <div class="sig">KARAT DESIGN SOFT • 2024-2026</div>
-    <button class="timer-btn" style="border: 1px solid rgba(212,175,55,0.2); font-size: 0.65em; margin-top: 20px; opacity:0.7;" onclick="prenesiAplikacijo()">PRENESI ZA OFFLINE UPORABO</button>
+    <button id="stop-btn" class="stop" onclick="ustavi()">Ustavi seanso</button>
 </div>
 
 <script>
-    let avdio, oscilator, ojacanje, timerInt, secondsLeft = 0;
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let pts = [];
+    let audioCtx, oscillator, gainNode, breathInterval, sessionTimeout, countdownInterval;
+    let currentTempo = 10;
+    let sessionMinutes = 10;
 
-    const opisiFaz = [
-        "FAZA 1 - SPOČETJE: Čas za nove ideje in zasaditev semen vaše namere. Energija je sveža in polna potenciala.",
-        "FAZA 2 - INKUBACIJA: Čas tihe rasti v ozadju. Povežite se s svojo intuicijo in počakajte, da se stvari razvijejo same.",
-        "FAZA 3 - EKSPRESIJA: Prvi preboji postajajo vidni. Izrazite svojo kreativnost in začnite deliti svojo vizijo.",
-        "FAZA 4 - STRUKTURA: Fokus na disciplini. Postavite trdne temelje in uredite praktične vidike svojega življenja.",
-        "FAZA 5 - EKSPANZIJA: Čas za spremembe, svobodo in raziskovanje novih možnosti. Ne bojte se tveganja.",
-        "FAZA 6 - HARMONIJA: Osredotočite se na dom, družino in ljubezen. Čas za celjenje odnosov in notranje ravnovesje.",
-        "FAZA 7 - RESNICA: Duhovna uglasitev. Poglobite se vase, meditirajte in poiščite odgovore v svoji notranjosti.",
-        "FAZA 8 - MANIFESTACIJA: Žetev vaših naporov. Čas materializacije ciljev in uporabe osebne moči.",
-        "FAZA 9 - MODROST: Zaključek cikla. Čas za odpuščanje starega, hvaležnost in pripravo na novo biološko rojstvo."
-    ];
-
-    function initParticles() {
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        pts = []; for(let i=0; i<85; i++) pts.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, s:Math.random()*1.8, v:Math.random()*0.35});
-    }
-    function anim() {
-        ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
-        pts.forEach(p => { p.y -= p.v; if(p.y < 0) p.y = canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill(); });
-        requestAnimationFrame(anim);
-    }
-    window.onresize = initParticles; initParticles(); anim();
-
-    function toggleInfo(id) {
-        const el = document.getElementById(id);
-        el.style.display = (el.style.display === "block") ? "none" : "block";
+    function checkSavedData() {
+        const savedDate = localStorage.getItem('monad_birthdate');
+        const savedDuration = localStorage.getItem('monad_duration');
+        if(savedDate) {
+            document.getElementById('datum').value = savedDate;
+            izracunajVse();
+        }
+        setDuration(savedDuration ? parseInt(savedDuration) : 10);
     }
 
-    function setTimer(min) {
-        clearInterval(timerInt);
-        if(min === 0) { secondsLeft = 0; updateTimerUI("Neomejeno"); return; }
-        secondsLeft = min * 60; updateTimerUI();
-        timerInt = setInterval(() => {
-            secondsLeft--; updateTimerUI();
-            if(secondsLeft <= 0) { clearInterval(timerInt); ustavi(false); document.getElementById('afirmacija').innerText = "Seansa zaključena."; }
+    function setDuration(m) {
+        sessionMinutes = m;
+        localStorage.setItem('monad_duration', m);
+        document.querySelectorAll('.timer-container .t-btn').forEach(b => b.classList.remove('active'));
+        const btn = document.getElementById('dur' + m);
+        if(btn) btn.classList.add('active');
+    }
+
+    function playBell() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 3);
+        g.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 4);
+        osc.connect(g); g.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 4);
+    }
+
+    function igraj(freq, msg, bg) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        ustavi();
+
+        oscillator = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 1.5);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start();
+
+        document.getElementById('afirmacija').innerText = msg;
+        document.getElementById('breathUI').style.display = 'block';
+        document.getElementById('tempoUI').style.display = 'block';
+        document.getElementById('stop-btn').style.display = 'block';
+        document.body.style.background = bg;
+
+        setTempo(currentTempo);
+
+        let timeLeft = sessionMinutes * 60;
+        sessionTimeout = setTimeout(() => { ustavi(); playBell(); }, timeLeft * 1000);
+        
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            let m = Math.floor(timeLeft / 60); let s = timeLeft % 60;
+            document.getElementById('remaining-time').innerText = `Preostalo: ${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) clearInterval(countdownInterval);
         }, 1000);
     }
 
-    function updateTimerUI(val) {
-        const display = document.getElementById('timer-display');
-        if(val) { display.innerText = "Čas: " + val; return; }
-        let m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
-        display.innerText = `Preostalo: ${m}:${s < 10 ? '0'+s : s}`;
-    }
-
-    function igraj(f, afirm, barva) {
-        if (!avdio) avdio = new (window.AudioContext || window.webkitAudioContext)();
-        if (avdio.state === 'suspended') avdio.resume();
-        ustavi(false);
-        document.body.style.background = barva;
-        document.getElementById('afirmacija').innerText = afirm;
-        document.getElementById('breathUI').style.display = "block";
-        oscilator = avdio.createOscillator(); ojacanje = avdio.createGain();
-        oscilator.frequency.value = f; ojacanje.gain.setValueAtTime(0, avdio.currentTime);
-        ojacanje.gain.linearRampToValueAtTime(0.06, avdio.currentTime + 1.5);
-        oscilator.connect(ojacanje); ojacanje.connect(avdio.destination); oscilator.start();
-    }
-
-    function ustavi(resetTimer = true) {
-        if (oscilator) { ojacanje.gain.linearRampToValueAtTime(0, avdio.currentTime + 1.2); oscilator.stop(avdio.currentTime + 1.5); oscilator = null; }
-        document.body.style.background = "#05070a"; document.getElementById('breathUI').style.display = "none";
-        if(resetTimer) { clearInterval(timerInt); updateTimerUI("Neomejeno"); document.getElementById('afirmacija').innerText = "Uglasitev zaključena."; }
-    }
-
-    function izracunaj() {
-        const d = new Date(document.getElementById('datum').value);
-        if(isNaN(d)) return;
-        const danes = new Date(); const razlika = Math.floor((danes - d) / 86400000);
+    function setTempo(s) {
+        currentTempo = s;
+        const circle = document.getElementById('mainCircle');
+        const text = document.getElementById('breath-text');
+        document.querySelectorAll('#tempoUI .t-btn').forEach(b => b.classList.remove('active'));
+        const btn = document.getElementById('t' + s);
+        if(btn) btn.classList.add('active');
         
-        const dniVCiklu = razlika % 266;
-        const fazaIndex = Math.min(Math.floor(dniVCiklu / (266 / 9)), 8);
-        document.getElementById('faza-num').innerText = fazaIndex + 1;
-        document.getElementById('faza-text').innerText = opisiFaz[fazaIndex];
-        document.getElementById('faza-box').style.display = "block";
-
-        document.getElementById('r1').innerText = (razlika/354.37).toFixed(1);
-        document.getElementById('r2').innerText = (razlika/266).toFixed(1);
-        let n = new Date(d); n.setDate(d.getDate() + (Math.floor(razlika/266)+1)*266);
-        document.getElementById('r3').innerText = n.toLocaleDateString('sl-SI');
-        document.getElementById('rezultat').style.display = "block";
+        circle.style.animation = 'none'; text.style.animation = 'none'; circle.offsetHeight; 
+        circle.style.animation = `breathe ${s}s infinite ease-in-out`;
+        text.style.animation = `textFade ${s}s infinite ease-in-out`;
+        startBreathLoop(s);
     }
 
-    function prenesiAplikacijo() {
-        const koda = document.documentElement.outerHTML; const blob = new Blob([koda], { type: 'text/html' });
-        const url = window.URL.createObjectURL(blob); const a = document.createElement('a');
-        a.href = url; a.download = 'Monad-Harmony.html'; a.click(); window.URL.revokeObjectURL(url);
+    function startBreathLoop(s) {
+        clearInterval(breathInterval);
+        const txt = document.getElementById('breath-text');
+        txt.innerText = "Vdih";
+        breathInterval = setInterval(() => {
+            txt.innerText = (txt.innerText === "Vdih") ? "Izdih" : "Vdih";
+        }, (s / 2) * 1000);
     }
+
+    function ustavi() {
+        if (oscillator) {
+            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+            setTimeout(() => { if(oscillator) { oscillator.stop(); oscillator = null; } }, 500);
+        }
+        clearInterval(breathInterval); clearInterval(countdownInterval); clearTimeout(sessionTimeout);
+        document.getElementById('breathUI').style.display = 'none';
+        document.getElementById('tempoUI').style.display = 'none';
+        document.getElementById('stop-btn').style.display = 'none';
+        document.body.style.background = "#05070a";
+    }
+
+    function izracunajVse() {
+        const d = document.getElementById('datum').value;
+        if(!d) return;
+        localStorage.setItem('monad_birthdate', d);
+
+        let st = d.replace(/-/g, '').split('').reduce((a, b) => a + parseInt(b), 0);
+        while(st > 9) st = st.toString().split('').reduce((a, b) => a + parseInt(b), 0);
+
+        const birth = new Date(d);
+        const now = new Date();
+        const diffDays = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
+        const lunarAge = (diffDays / 354.36).toFixed(2);
+        const exactCycles = diffDays / 29.53059;
+        const currentProgress = exactCycles % 1;
+
+        let fazaOpis = ""; let tempo = 10;
+        if (currentProgress < 0.12 || currentProgress > 0.88) { fazaOpis = "Mlada luna (Novi začetki)"; tempo = 8; }
+        else if (currentProgress < 0.38) { fazaOpis = "Rastoča luna (Ekspanzija)"; tempo = 10; }
+        else if (currentProgress < 0.62) { fazaOpis = "Polna luna (Vrhunec energije)"; tempo = 12; }
+        else { fazaOpis = "Padajoča luna (Sproščanje)"; tempo = 10; }
+
+        setTempo(tempo);
+        const fazaBox = document.getElementById('faza-box');
+        fazaBox.style.display = 'block';
+        fazaBox.innerHTML = `
+            <strong>BIOLOŠKA FAZA: ${st}</strong><br>
+            Skupaj živite: ${diffDays.toLocaleString()} dni<br>
+            Lunarna starost: ${lunarAge} let<br>
+            Cikli prenove: ${exactCycles.toFixed(2)}. lunacija<br>
+            <span style="color:#fff;font-size:0.85em;">Trenutni vpliv: ${fazaOpis}</span>
+        `;
+        
+        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));
+        const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
+        const closest = frqs.reduce((p, c) => Math.abs(c - (st * 100)) < Math.abs(p - (st * 100)) ? c : p);
+        const targetBtn = document.getElementById('btn' + closest);
+        if(targetBtn) targetBtn.classList.add('suggested');
+    }
+
+    function toggleInfo(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    let parts = [];
+    for(let i=0; i<45; i++) parts.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.4});
+    function anim() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(212,175,55,0.25)";
+        parts.forEach(p => { p.y -= p.v; if(p.y<0) p.y=canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); });
+        requestAnimationFrame(anim);
+    }
+    anim();
 </script>
 </body>
 </html>

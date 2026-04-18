@@ -2,7 +2,6 @@
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://githubusercontent.com; connect-src 'none';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Monad Harmony</title>
     
@@ -10,7 +9,7 @@
     <meta property="og:title" content="Monad Harmony">
     <meta property="og:description" content="Vse je številka. Vse je resonanca. Biološka uglasitev.">
     <meta property="og:url" content="https://github.io">
-    <meta property="og:image" content="https://githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/main/og-image.jpg">
+    <meta property="og:image" content="https://githubusercontent.com">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -44,17 +43,17 @@
         }
 
         h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; }
-        .quote { font-size: 0.85em; font-style: italic; opacity: 0.7; margin: 5px 0 15px 0; }
+        .quote { font-size: 0.85em; font-style: italic; opacity: 0.7; margin: 5px 0 15px 0; letter-spacing: 1px; }
 
         .timer-container { margin: 10px 0; font-size: 0.8em; opacity: 0.9; }
         .tempo-container { margin: 15px 0; display: none; }
         .tempo-btns { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
         
-        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 10px; border-radius: 8px; font-size: 0.72em; cursor: pointer; transition: 0.3s; }
+        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 10px; border-radius: 8px; font-size: 0.7em; cursor: pointer; transition: 0.3s; }
         .t-btn.active { border-color: var(--gold); background: rgba(214,175,55,0.2); box-shadow: 0 0 10px var(--faza-color); }
 
         .breath-wrap { margin: 25px 0; display: none; }
-        .circle { width: 115px; height: 115px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .circle { width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
         #breath-text { font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         @keyframes breathe { 0%, 100% { transform: scale(0.75); opacity: 0.2; } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 60px var(--gold); } }
@@ -106,7 +105,7 @@
     <div class="tempo-container" id="tempoUI">
         <div class="tempo-btns">
             <button class="t-btn" id="t8" onclick="setTempo(8)">SPROŠČENO (8s)</button>
-            <button class="t-btn active" id="t10" onclick="setTempo(10)">HARMONIJA (10s)</button>
+            <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONIJA (10s)</button>
             <button class="t-btn" id="t12" onclick="setTempo(12)">GLOBOKO (12s)</button>
         </div>
     </div>
@@ -121,12 +120,12 @@
     <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 45px;">Izberite frekvenco ali izračunajte uglasitev.</div>
 
     <div class="grid">
-        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost.', '#0a0a1a')">174 Hz</button>
-        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Obnova.', '#1a1200')">285 Hz</button>
-        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Strah.', '#350000')">396 Hz</button>
+        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost in mir.', '#0a0a1a')">174 Hz</button>
+        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Obnova polja.', '#1a1200')">285 Hz</button>
+        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Brez strahu.', '#350000')">396 Hz</button>
         <button id="btn417" class="f-btn" style="background:rgba(210,130,0,0.6)" onclick="igraj(417, 'Sprememba.', '#351d00')">417 Hz</button>
-        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Mir.', '#121a12')">432 Hz</button>
-        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'DNK.', '#002500')">528 Hz</button>
+        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Harmonija.', '#121a12')">432 Hz</button>
+        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'Čudeži.', '#002500')">528 Hz</button>
         <button id="btn639" class="f-btn" style="background:rgba(0,90,140,0.6)" onclick="igraj(639, 'Odnosi.', '#001825')">639 Hz</button>
         <button id="btn741" class="f-btn" style="background:rgba(0,0,160,0.6)" onclick="igraj(741, 'Resnica.', '#000040')">741 Hz</button>
         <button id="btn852" class="f-btn" style="background:rgba(100,0,160,0.6)" onclick="igraj(852, 'Intuicija.', '#200035')">852 Hz</button>
@@ -151,7 +150,7 @@
     <div class="info-section">
         <span class="info-title" onclick="toggleInfo('freq-info')">▼ Pomen Solfeggio Frekvenc</span>
         <div id="freq-info" class="info-content">
-            • 174 Hz: Mir. • 285 Hz: Tkiva. • 396 Hz: Strah. • 417 Hz: Spremembe. • 432 Hz: Narava. • 528 Hz: DNK. • 639 Hz: Odnosi. • 741 Hz: Celice. • 852 Hz: Intuicija. • 963 Hz: Zavest.
+            • 174 Hz: Mir. • 285 Hz: Obnova. • 396 Hz: Strah. • 417 Hz: Sprememba. • 432 Hz: Narava. • 528 Hz: DNK. • 639 Hz: Odnosi. • 741 Hz: Celice. • 852 Hz: Intuicija. • 963 Hz: Zavest.
         </div>
     </div>
 
@@ -203,13 +202,20 @@
     }
 
     function igraj(freq, msg, bg) {
-        if (!audioCtx) audioCtx = new AudioContext();
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         ustavi();
-        oscillator = audioCtx.createOscillator(); gainNode = audioCtx.createGain();
-        oscillator.type = 'sine'; oscillator.frequency.value = freq;
+
+        oscillator = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 1.5);
-        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
+        gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
         oscillator.start();
 
         document.getElementById('afirmacija').innerText = msg;
@@ -217,15 +223,17 @@
         document.getElementById('tempoUI').style.display = 'block';
         document.getElementById('stop-btn').style.display = 'block';
         document.body.style.background = bg;
+        
         setTempo(currentTempo);
 
         let timeLeft = sessionMinutes * 60;
         sessionTimeout = setTimeout(() => { ustavi(); playBell(); }, timeLeft * 1000);
+        
         countdownInterval = setInterval(() => {
             timeLeft--;
-            let m = Math.floor(timeLeft/60), s = timeLeft%60;
+            let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
             document.getElementById('remaining-time').innerText = `Preostalo: ${m}:${s.toString().padStart(2,'0')}`;
-            if(timeLeft<=0) clearInterval(countdownInterval);
+            if(timeLeft <= 0) clearInterval(countdownInterval);
         }, 1000);
     }
 
@@ -233,18 +241,31 @@
         currentTempo = s;
         const c = document.getElementById('mainCircle'), t = document.getElementById('breath-text');
         document.querySelectorAll('#tempoUI .t-btn').forEach(b => b.classList.remove('active'));
-        const btn = document.getElementById('t'+s); if(btn) btn.classList.add('active');
-        c.style.animation = 'none'; t.style.animation = 'none'; c.offsetHeight;
+        const btn = document.getElementById('t' + s); if(btn) btn.classList.add('active');
+        
+        c.style.animation = 'none'; t.style.animation = 'none'; c.offsetHeight; 
         c.style.animation = `breathe ${s}s infinite ease-in-out`;
         t.style.animation = `textFade ${s}s infinite ease-in-out`;
-        clearInterval(breathInterval); t.innerText = "Vdih";
-        breathInterval = setInterval(() => t.innerText = t.innerText === "Vdih" ? "Izdih" : "Vdih", (s/2)*1000);
+        
+        clearInterval(breathInterval);
+        t.innerText = "Vdih";
+        breathInterval = setInterval(() => {
+            t.innerText = t.innerText === "Vdih" ? "Izdih" : "Vdih";
+        }, (s / 2) * 1000);
     }
 
     function ustavi() {
-        if(oscillator) { gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5); setTimeout(()=> { if(oscillator) oscillator.stop(); }, 500); }
-        clearInterval(breathInterval); clearInterval(countdownInterval); clearTimeout(sessionTimeout);
+        if(oscillator) {
+            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+            const oldOsc = oscillator;
+            setTimeout(() => { try { oldOsc.stop(); } catch(e){} }, 500);
+            oscillator = null;
+        }
+        clearInterval(breathInterval);
+        clearInterval(countdownInterval);
+        clearTimeout(sessionTimeout);
         document.getElementById('breathUI').style.display = 'none';
+        document.getElementById('tempoUI').style.display = 'none';
         document.getElementById('stop-btn').style.display = 'none';
         document.body.style.background = "#05070a";
     }
@@ -252,33 +273,44 @@
     function izracunajVse() {
         const d = document.getElementById('datum').value; if(!d) return;
         localStorage.setItem('monad_date', d);
-        let st = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0);
-        while(st>9) st = st.toString().split('').reduce((a,b)=>a+parseInt(b),0);
-        
-        const diffDays = Math.floor((new Date() - new Date(d))/(1000*60*60*24));
-        const lunarAge = (diffDays / 354.36).toFixed(2);
-        const cycles = diffDays / 29.53059;
-        const progress = cycles % 1;
 
-        let fazaTxt = "", tempo = 10;
-        if (progress < 0.12 || progress > 0.88) { fazaTxt = "Mlada luna (Novi začetki)"; tempo = 8; }
-        else if (progress < 0.62 && progress > 0.38) { fazaTxt = "Polna luna (Vrhunec)"; tempo = 12; }
-        else { fazaTxt = "Prehodna faza (Ravnovesje)"; tempo = 10; }
-        
+        let st = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0);
+        while(st > 9) st = st.toString().split('').reduce((a,b)=>a+parseInt(b),0);
+
+        const birth = new Date(d);
+        const now = new Date();
+        const diffDays = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
+        const lunarAge = (diffDays / 354.36).toFixed(2);
+        const exactCycles = diffDays / 29.53059;
+        const currentProgress = exactCycles % 1;
+
+        let fazaOpis = "", tempo = 10;
+        if (currentProgress < 0.12 || currentProgress > 0.88) { fazaOpis = "Mlada luna (Novi začetki)"; tempo = 8; }
+        else if (currentProgress < 0.38) { fazaOpis = "Rastoča luna (Ekspanzija)"; tempo = 10; }
+        else if (currentProgress < 0.62) { fazaOpis = "Polna luna (Vrhunec energije)"; tempo = 12; }
+        else { fazaOpis = "Padajoča luna (Sproščanje)"; tempo = 10; }
+
         setTempo(tempo);
-        const fBox = document.getElementById('faza-box');
-        fBox.style.display = 'block';
-        fBox.innerHTML = `<strong>BIOLOŠKA FAZA: ${st}</strong><br>Živite: ${diffDays.toLocaleString()} dni<br>Lunarna starost: ${lunarAge} let<br>Cikli: ${cycles.toFixed(2)}. lunacija<br><small>Vpliv: ${fazaTxt}</small>`;
+        const fazaBox = document.getElementById('faza-box');
+        fazaBox.style.display = 'block';
+        fazaBox.innerHTML = `
+            <strong>BIOLOŠKA FAZA: ${st}</strong><br>
+            Skupaj živite: ${diffDays.toLocaleString()} dni<br>
+            Lunarna starost: ${lunarAge} let<br>
+            Cikli prenove: ${exactCycles.toFixed(2)}. lunacija<br>
+            <span style="color:#fff; font-size:0.85em; opacity:0.9;">Trenutni vpliv: ${fazaOpis}</span>
+        `;
         
         document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));
-        const fqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
-        const closest = fqs.reduce((p, c) => Math.abs(c - (st * 100)) < Math.abs(p - (st * 100)) ? c : p);
-        const targetBtn = document.getElementById('btn' + closest); if(targetBtn) targetBtn.classList.add('suggested');
+        const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
+        const closest = frqs.reduce((p, c) => Math.abs(c - (st * 100)) < Math.abs(p - (st * 100)) ? c : p);
+        const targetBtn = document.getElementById('btn' + closest);
+        if(targetBtn) targetBtn.classList.add('suggested');
     }
 
     const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let ps = []; for(let i=0; i<45; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, v: Math.random()*0.4, r: Math.random()*1.5});
+    let ps = []; for(let i=0; i<45; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.4});
     function anim() {
         ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(212,175,55,0.25)";
         ps.forEach(p => { p.y -= p.v; if(p.y<0) p.y=canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); });

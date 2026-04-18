@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monad Harmony | Brezplačna biološka uglasitev</title>
-
-    <!-- Ikona (favicon) -->
+    <title>Monad Harmony | Holistična Seansa</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌑</text></svg>">
-
-    <!-- Meta oznake za deljenje (Facebook, Messenger, WhatsApp) -->
+    
     <meta property="og:title" content="Monad Harmony | Brezplačna uglasitev">
     <meta property="og:description" content="Izračunajte svoja lunarna leta in se potopite v terapevtske frekvence s kromoterapijo.">
     <meta property="og:type" content="website">
@@ -18,194 +15,228 @@
     <meta property="og:image:height" content="630">
 
     <style>
+        :root { --gold: #d4af37; }
         body { 
-            background: #05070a; 
-            color: #d4af37; 
-            font-family: 'Georgia', serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            padding: 15px; 
-            margin: 0; 
-            min-height: 100vh;
-            transition: background 2s ease;
+            background: #05070a; color: var(--gold); font-family: 'Georgia', serif; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; margin: 0; overflow-x: hidden; transition: background 2.5s ease;
         }
-        
+        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
         .box { 
-            background: rgba(10, 15, 25, 0.85); 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(214, 175, 55, 0.3); 
-            padding: 30px; 
-            border-radius: 24px; 
-            max-width: 600px; 
-            width: 100%; 
-            box-sizing: border-box;
-            text-align: center; 
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            /* Močno povečana prosojnost za boljši učinek kromoterapije */
+            background: rgba(10, 15, 25, 0.4); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(214, 175, 55, 0.4); 
+            padding: 30px; border-radius: 24px; 
+            max-width: 650px; width: 92%; text-align: center; 
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            z-index: 10; margin: 20px 0;
+            transition: border 1s ease;
         }
 
-        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 12px; 
-            margin: 25px 0; 
+        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        .breath-wrap { margin: 20px 0; display: none; }
+        .circle {
+            width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 50%;
+            margin: 0 auto; animation: breathe 8s infinite ease-in-out;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
         }
-        
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.75); opacity: 0.2; }
+            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 50px var(--gold); }
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
         .f-btn { 
-            padding: 18px 5px; 
-            cursor: pointer; 
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            font-weight: bold; 
-            border-radius: 12px; 
-            color: white; 
-            transition: 0.3s;
-            font-size: 0.95em;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.15); 
+            border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.9em;
+            background: rgba(255, 255, 255, 0.05);
         }
+        .f-btn:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.03); }
 
-        .f-btn:active { transform: scale(0.95); }
+        .timer-btn { background: rgba(0,0,0,0.3); border: 1px solid var(--gold); color: var(--gold); padding: 6px 12px; border-radius: 6px; cursor: pointer; margin: 4px; font-size: 0.8em; }
+        #afirmacija { font-style: italic; min-height: 45px; margin: 15px 0; color: #fff; font-size: 1.15em; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+        
+        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; line-height: 1.6; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; color: #fff; }
+        .info-content { display: none; margin-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 10px; color: #eee; }
 
-        .stop { 
-            background: rgba(150, 0, 0, 0.6); 
-            color: #fff; 
-            width: 100%; 
-            padding: 15px; 
-            cursor: pointer; 
-            border: 1px solid #f00; 
-            margin-top: 15px; 
-            font-weight: bold; 
-            border-radius: 12px;
-            text-transform: uppercase;
-        }
+        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ff4444; cursor: pointer; font-weight: bold; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        input { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 65%; font-size: 1em; text-align: center; }
+        .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 22px; border-radius: 10px; border: none; cursor: pointer; transition: 0.3s; }
+        .calc-btn:hover { background: #fff; transform: translateY(-2px); }
 
-        #info { 
-            margin-top: 25px; 
-            min-height: 110px; 
-            font-style: italic; 
-            border-top: 1px solid rgba(212, 175, 55, 0.2); 
-            padding-top: 20px;
-            line-height: 1.6;
-            font-size: 1.2em; 
-            color: #f0f0f0;
-        }
-
-        .sig { margin-top: 30px; letter-spacing: 5px; opacity: 0.5; font-size: 0.75em; font-weight: bold; }
-
-        input { padding: 12px; border: 1px solid #d4af37; background: rgba(0,0,0,0.5); color: #d4af37; border-radius: 8px; font-size: 1em; width: 60%; }
-        button.calc-btn { background: #d4af37; color: #000; font-weight: bold; padding: 12px 20px; cursor: pointer; border: none; border-radius: 8px; font-size: 0.9em; margin-top: 10px; }
-
-        #rezultat { text-align: left; margin-top: 20px; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 15px; }
-        #navodila { display:none; text-align: left; margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 10px; font-size: 0.9em; line-height: 1.5; color: #ddd; }
-        b { color: #d4af37; }
-
-        @media (max-width: 450px) {
-            .grid { grid-template-columns: 1fr 1fr; }
-        }
+        .sig { margin-top: 30px; font-size: 0.75em; opacity: 0.6; letter-spacing: 4px; font-weight: bold; text-shadow: 1px 1px 2px #000; }
+        #faza-box { background: rgba(212, 175, 55, 0.15); padding: 18px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 18px 0; display: none; text-align: left; backdrop-filter: blur(5px);}
+        
+        @media (max-width: 450px) { .grid { grid-template-columns: 1fr 1fr; } h1 { font-size: 1.5em; } }
     </style>
 </head>
 <body>
 
+<canvas id="particles"></canvas>
+
 <div class="box">
     <h1>Monad Harmony</h1>
-    <p style="opacity: 0.8; font-size: 0.9em; margin-bottom: 20px;"><i>Brezplačna kromoterapija in biološka uglasitev</i></p>
+    <p style="font-size: 0.85em; font-style: italic; opacity: 0.8; margin-top: -5px; text-shadow: 1px 1px 2px #000;">"Vse je številka. Vse je resonanca."</p>
+    
+    <div id="timer-display" style="font-size: 0.85em; opacity: 0.8; margin-top: 20px;">Nastavi dolžino seanse:</div>
+    <div class="timer-controls">
+        <button class="timer-btn" onclick="setTimer(5)">5 min</button>
+        <button class="timer-btn" onclick="setTimer(15)">15 min</button>
+        <button class="timer-btn" onclick="setTimer(30)">30 min</button>
+        <button class="timer-btn" onclick="setTimer(0)">∞ Reset</button>
+    </div>
 
-    <div style="margin: 10px 0 25px 0;">
+    <div class="breath-wrap" id="breathUI">
+        <div class="circle"></div>
+        <p style="font-size: 0.9em; margin-top: 20px; letter-spacing: 3px; font-weight: bold; text-shadow: 1px 1px 3px #000;">VDIH ... IZDIH</p>
+    </div>
+
+    <div id="afirmacija">Izberite frekvenco za pričetek uglasitve.</div>
+
+    <div class="grid">
+        <button class="f-btn" style="background: rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost in mir. Bolečina odteka.', '#0a0a1a')">174 Hz</button>
+        <button class="f-btn" style="background: rgba(120,70,0,0.6)" onclick="igraj(285, 'Regeneracija in obnova polja.', '#1a1200')">285 Hz</button>
+        <button class="f-btn" style="background: rgba(180,0,0,0.6)" onclick="igraj(396, 'Sem svoboden strahu in krivde.', '#350000')">396 Hz</button>
+        <button class="f-btn" style="background: rgba(210,130,0,0.6); color:#fff" onclick="igraj(417, 'Odpravljam staro, sprejemam novo.', '#351d00')">417 Hz</button>
+        <button class="f-btn" style="background: rgba(75,75,75,0.6)" onclick="igraj(432, 'Sem v harmoniji z naravo.', '#121a12')">432 Hz</button>
+        <button class="f-btn" style="background: rgba(0,120,0,0.6)" onclick="igraj(528, 'Ljubezen in čudeži me prežemajo.', '#002500')">528 Hz</button>
+        <button class="f-btn" style="background: rgba(0,90,140,0.6)" onclick="igraj(639, 'Harmonija v mojih odnosih.', '#001825')">639 Hz</button>
+        <button class="f-btn" style="background: rgba(0,0,160,0.6)" onclick="igraj(741, 'Moja beseda je resnica.', '#000040')">741 Hz</button>
+        <button class="f-btn" style="background: rgba(100,0,160,0.6)" onclick="igraj(852, 'Moja intuicija je jasna.', '#200035')">852 Hz</button>
+        <button class="f-btn" style="background: rgba(160,0,160,0.6)" onclick="igraj(963, 'Sem eno z Izvorom.', '#350035')">963 Hz</button>
+    </div>
+
+    <div class="info-section">
+        <span class="info-title" onclick="toggleInfo('freq-info')">▼ Pomen Solfeggio Frekvenc</span>
+        <div id="freq-info" class="info-content">
+            <p>• 174 Hz: Varnost. • 285 Hz: Obnova tkiv. • 396 Hz: Osvobajanje strahu. • 417 Hz: Spremembe. • 432 Hz: Mir narave. • 528 Hz: Ljubezen in DNK. • 639 Hz: Odnosi. • 741 Hz: Čiščenje celic. • 852 Hz: Intuicija. • 963 Hz: Božanska enost.</p>
+        </div>
+    </div>
+
+    <div style="margin: 35px 0;">
         <input type="date" id="datum" value="1975-11-21">
         <button class="calc-btn" onclick="izracunaj()">UGLASI ME</button>
+    </div>
+
+    <div id="rezultat" style="display:none; text-align: left; font-size: 1em; border-top: 1px solid rgba(212,175,55,0.3); padding-top: 20px;">
+        <div id="faza-box">
+            <h3 style="margin-top:0; color:#fff; letter-spacing:1px;">TRENUTNA FAZA: <span id="faza-num"></span></h3>
+            <p id="faza-text" style="line-height:1.5; color:#eee;"></p>
+        </div>
         
-        <div id="rezultat" style="display:none;">
-            <p>• Lunarna starost: <b id="r1"></b> let</p>
-            <p>• Cikli zorenja (266 dni): <b id="r2"></b></p>
-            <p>• Naslednja biološka prenova: <b id="r3"></b></p>
-            <button class="calc-btn" style="background: none; color: #d4af37; border: 1px solid #d4af37; margin-top: 10px; width: 100%;" onclick="toggleNavodila()">MODROST FREKVENC</button>
-            <div id="navodila">
-                <p>• 174 Hz: Lajšanje bolečin. • 285 Hz: Obnova tkiv. • 396 Hz: Osvobajanje strahu. • 417 Hz: Odpravljanje negativnosti. • 432 Hz: Mir in harmonija. • 528 Hz: Ljubezen in DNK. • 639 Hz: Odnosi. • 741 Hz: Čiščenje celic. • 852 Hz: Intuicija. • 963 Hz: Božanska Enost.</p>
+        <p>• Lunarna starost: <b id="r1"></b> let</p>
+        <p>• Cikli biološke prenove (266 dni): <b id="r2"></b></p>
+        <p>• Naslednji izvorni reset: <b id="r3"></b></p>
+        
+        <div class="info-section">
+            <span class="info-title" onclick="toggleInfo('num-info')">▼ Numerološki Cikel (1-9)</span>
+            <div id="num-info" class="info-content">
+                <p>1-Spočetje. 2-Inkubacija. 3-Ekspresija. 4-Struktura. 5-Ekspanzija. 6-Harmonija. 7-Resnica. 8-Manifestacija. 9-Modrost.</p>
             </div>
         </div>
     </div>
 
-    <div class="grid">
-        <button class="f-btn" style="background:#333" onclick="igraj(174, '174 Hz: Naravni anestetik. Zmanjšuje fizično bolečino.', '#12121a')">174 Hz</button>
-        <button class="f-btn" style="background:#7a4a00" onclick="igraj(285, '285 Hz: Regeneracija celic in obnova polja.', '#2a1a00')">285 Hz</button>
-        <button class="f-btn" style="background:#b30000" onclick="igraj(396, '396 Hz: Osvobajanje strahu in blokad.', '#4a0000')">396 Hz</button>
-        <button class="f-btn" style="background:#e69500; color: #000;" onclick="igraj(417, '417 Hz: Čiščenje negativnosti in travm.', '#4a2d00')">417 Hz</button>
-        <button class="f-btn" style="background:#5c5c5c" onclick="igraj(432, '432 Hz: Harmonija narave in notranji mir.', '#1a221a')">432 Hz</button>
-        <button class="f-btn" style="background:#008f00" onclick="igraj(528, '528 Hz: Popravljanje DNK in vitalnost.', '#003300')">528 Hz</button>
-        <button class="f-btn" style="background:#0077b3" onclick="igraj(639, '639 Hz: Harmonizacija odnosov in ljubezen.', '#00263a')">639 Hz</button>
-        <button class="f-btn" style="background:#0000cc" onclick="igraj(741, '741 Hz: Čiščenje strupov in resnica.', '#00004a')">741 Hz</button>
-        <button class="f-btn" style="background:#8000cc" onclick="igraj(852, '852 Hz: Prebujanje močne intuicije.', '#26003d')">852 Hz</button>
-        <button class="f-btn" style="background:#cc00cc" onclick="igraj(963, '963 Hz: Povezava z univerzalno zavestjo.', '#3d003d')">963 Hz</button>
-    </div>
-
-    <button class="stop" onclick="ustavi()">Ustavi zvok in barve</button>
-    <div id="info">Izberite frekvenco za globoko barvno in zvočno terapijo.</div>
-
+    <button class="stop" onclick="ustavi()">USTAVI SEANSO</button>
     <div class="sig">KARAT DESIGN SOFT • 2024</div>
-    <button class="calc-btn" style="background: none; color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 20px; width: auto; font-size: 0.65em; padding: 5px 12px;" onclick="prenesiAplikacijo()">PRENESI ZA OFFLINE UPORABO</button>
+    <button class="timer-btn" style="border: 1px solid rgba(212,175,55,0.2); font-size: 0.65em; margin-top: 20px; opacity:0.7;" onclick="prenesiAplikacijo()">PRENESI ZA OFFLINE UPORABO</button>
 </div>
 
 <script>
-    let avdio, oscilator, ojacanje;
+    let avdio, oscilator, ojacanje, timerInt, secondsLeft = 0;
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let pts = [];
 
-    function igraj(f, opis, barva) {
-        if (!avdio) { avdio = new (window.AudioContext || window.webkitAudioContext)(); }
-        if (avdio.state === 'suspended') { avdio.resume(); }
-        ustavi();
-        document.body.style.background = barva;
-        document.getElementById('info').innerHTML = "<strong>" + opis + "</strong>";
-        oscilator = avdio.createOscillator();
-        ojacanje = avdio.createGain();
-        oscilator.type = 'sine';
-        oscilator.frequency.value = f;
-        ojacanje.gain.setValueAtTime(0, avdio.currentTime);
-        ojacanje.gain.linearRampToValueAtTime(0.06, avdio.currentTime + 0.2);
-        oscilator.connect(ojacanje);
-        ojacanje.connect(avdio.destination);
-        oscilator.start();
+    const opisiFaz = [
+        "FAZA 1 - SPOČETJE: Čas za nove ideje in zasaditev semen vaše namere. Energija je sveža in polna potenciala.",
+        "FAZA 2 - INKUBACIJA: Čas tihe rasti v ozadju. Povežite se s svojo intuicijo in počakajte, da se stvari razvijejo same.",
+        "FAZA 3 - EKSPRESIJA: Prvi preboji postajajo vidni. Izrazite svojo kreativnost in začnite deliti svojo vizijo.",
+        "FAZA 4 - STRUKTURA: Fokus na disciplini. Postavite trdne temelje in uredite praktične vidike svojega življenja.",
+        "FAZA 5 - EKSPANZIJA: Čas za spremembe, svobodo in raziskovanje novih možnosti. Ne bojte se tveganja.",
+        "FAZA 6 - HARMONIJA: Osredotočite se na dom, družino in ljubezen. Čas za celjenje odnosov in notranje ravnovesje.",
+        "FAZA 7 - RESNICA: Duhovna uglasitev. Poglobite se vase, meditirajte in poiščite odgovore v svoji notranjosti.",
+        "FAZA 8 - MANIFESTACIJA: Žetev vaših naporov. Čas materializacije ciljev in uporabe osebne moči.",
+        "FAZA 9 - MODROST: Zaključek cikla. Čas za odpuščanje starega, hvaležnost in pripravo na novo biološko rojstvo."
+    ];
+
+    function initParticles() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        pts = []; for(let i=0; i<85; i++) pts.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, s:Math.random()*1.8, v:Math.random()*0.35});
+    }
+    function anim() {
+        ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
+        pts.forEach(p => { p.y -= p.v; if(p.y < 0) p.y = canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill(); });
+        requestAnimationFrame(anim);
+    }
+    window.onresize = initParticles; initParticles(); anim();
+
+    function toggleInfo(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === "block") ? "none" : "block";
     }
 
-    function ustavi() {
-        if (oscilator) { 
-            ojacanje.gain.linearRampToValueAtTime(0, avdio.currentTime + 0.2);
-            oscilator.stop(avdio.currentTime + 0.3); 
-            oscilator = null; 
-        }
-        document.body.style.background = "#05070a";
-        document.getElementById('info').innerText = "Izberite frekvenco za globoko barvno in zvočno terapijo.";
+    function setTimer(min) {
+        clearInterval(timerInt);
+        if(min === 0) { secondsLeft = 0; updateTimerUI("Neomejeno"); return; }
+        secondsLeft = min * 60; updateTimerUI();
+        timerInt = setInterval(() => {
+            secondsLeft--; updateTimerUI();
+            if(secondsLeft <= 0) { clearInterval(timerInt); ustavi(false); document.getElementById('afirmacija').innerText = "Seansa zaključena."; }
+        }, 1000);
+    }
+
+    function updateTimerUI(val) {
+        const display = document.getElementById('timer-display');
+        if(val) { display.innerText = "Čas: " + val; return; }
+        let m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+        display.innerText = `Preostalo: ${m}:${s < 10 ? '0'+s : s}`;
+    }
+
+    function igraj(f, afirm, barva) {
+        if (!avdio) avdio = new (window.AudioContext || window.webkitAudioContext)();
+        if (avdio.state === 'suspended') avdio.resume();
+        ustavi(false);
+        document.body.style.background = barva;
+        document.getElementById('afirmacija').innerText = afirm;
+        document.getElementById('breathUI').style.display = "block";
+        oscilator = avdio.createOscillator(); ojacanje = avdio.createGain();
+        oscilator.frequency.value = f; ojacanje.gain.setValueAtTime(0, avdio.currentTime);
+        ojacanje.gain.linearRampToValueAtTime(0.06, avdio.currentTime + 1.5);
+        oscilator.connect(ojacanje); ojacanje.connect(avdio.destination); oscilator.start();
+    }
+
+    function ustavi(resetTimer = true) {
+        if (oscilator) { ojacanje.gain.linearRampToValueAtTime(0, avdio.currentTime + 1.2); oscilator.stop(avdio.currentTime + 1.5); oscilator = null; }
+        document.body.style.background = "#05070a"; document.getElementById('breathUI').style.display = "none";
+        if(resetTimer) { clearInterval(timerInt); updateTimerUI("Neomejeno"); document.getElementById('afirmacija').innerText = "Uglasitev zaključena."; }
     }
 
     function izracunaj() {
         const d = new Date(document.getElementById('datum').value);
         if(isNaN(d)) return;
-        const danes = new Date();
-        const razlikaDni = Math.floor((danes - d) / (1000 * 60 * 60 * 24));
-        document.getElementById('r1').innerText = (razlikaDni / 354.37).toFixed(1);
-        document.getElementById('r2').innerText = (razlikaDni / 266).toFixed(1);
-        const cikel = Math.floor(razlikaDni / 266) + 1;
-        const naslednji = new Date(d);
-        naslednji.setDate(d.getDate() + (cikel * 266));
-        document.getElementById('r3').innerText = naslednji.toLocaleDateString('sl-SI');
-        document.getElementById('rezultat').style.display = 'block';
-    }
+        const danes = new Date(); const razlika = Math.floor((danes - d) / 86400000);
+        
+        const dniVCiklu = razlika % 266;
+        const fazaIndex = Math.min(Math.floor(dniVCiklu / (266 / 9)), 8);
+        document.getElementById('faza-num').innerText = fazaIndex + 1;
+        document.getElementById('faza-text').innerText = opisiFaz[fazaIndex];
+        document.getElementById('faza-box').style.display = "block";
 
-    function toggleNavodila() {
-        var n = document.getElementById('navodila');
-        n.style.display = (n.style.display === 'none') ? 'block' : 'none';
+        document.getElementById('r1').innerText = (razlika/354.37).toFixed(1);
+        document.getElementById('r2').innerText = (razlika/266).toFixed(1);
+        let n = new Date(d); n.setDate(d.getDate() + (Math.floor(razlika/266)+1)*266);
+        document.getElementById('r3').innerText = n.toLocaleDateString('sl-SI');
+        document.getElementById('rezultat').style.display = "block";
     }
 
     function prenesiAplikacijo() {
-        const koda = document.documentElement.outerHTML;
-        const blob = new Blob([koda], { type: 'text/html' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Monad-Harmony.html';
-        a.click();
-        window.URL.revokeObjectURL(url);
+        const koda = document.documentElement.outerHTML; const blob = new Blob([koda], { type: 'text/html' });
+        const url = window.URL.createObjectURL(blob); const a = document.createElement('a');
+        a.href = url; a.download = 'Monad-Harmony.html'; a.click(); window.URL.revokeObjectURL(url);
     }
 </script>
 </body>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>KARAT DESIGN - Harmonija</title>
+    <style>
+        body { 
+            background: #05070a; 
+            color: #d4af37; /* Vsa razlaga v zlati barvi */
+            font-family: serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px; 
+            margin: 0; 
+            min-height: 100vh;
+            transition: background 0.8s ease;
+        }
+        
+        .box { 
+            background: #12161f; 
+            border: 1px solid #d4af37; 
+            padding: 40px; 
+            border-radius: 20px; 
+            max-width: 500px; 
+            width: 90%; 
+            text-align: center; 
+            /* Glow efekt za celo kartico */
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.05);
+            position: relative;
+            margin-top: 50px;
+        }
+
+        h1 { 
+            color: #d4af37; 
+            font-variant: small-caps; 
+            letter-spacing: 3px; 
+            margin-top: 0;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 25px 0; }
+        
+        .f-btn { 
+            padding: 15px 5px; 
+            cursor: pointer; 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            font-weight: bold; 
+            border-radius: 8px; 
+            color: white; 
+            transition: 0.3s;
+        }
+        .f-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+
+        .stop { 
+            background: #400; 
+            color: #ffaaaa; 
+            width: 100%; 
+            padding: 12px; 
+            cursor: pointer; 
+            border: 1px solid #f00; 
+            margin-top: 15px; 
+            font-weight: bold; 
+            border-radius: 8px;
+            opacity: 0.8;
+        }
+
+        #info { 
+            margin-top: 25px; 
+            min-height: 45px; 
+            font-style: italic; 
+            border-top: 1px solid rgba(212, 175, 55, 0.3); 
+            padding-top: 20px;
+            color: #d4af37; /* Zlata razlaga */
+        }
+
+        .sig { 
+            margin-top: 40px; 
+            color: #d4af37; 
+            letter-spacing: 6px; 
+            font-weight: bold; 
+            opacity: 0.5; 
+            font-size: 0.9em;
+        }
+
+        input { 
+            padding: 10px; 
+            border: 1px solid #d4af37; 
+            background: #000; 
+            color: #d4af37; 
+            border-radius: 5px; 
+            text-align: center;
+        }
+
+        button.calc-btn {
+            background: #d4af37; 
+            color: #000; 
+            font-weight: bold; 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        #rezultat { 
+            text-align: left; 
+            margin-top: 25px; 
+            border-top: 1px solid rgba(212, 175, 55, 0.3); 
+            padding-top: 20px; 
+            display: none;
+            line-height: 1.8;
+            color: #d4af37; /* Zlata barva za rezultate */
+        }
+
+        b { color: #fff; text-shadow: 0 0 5px #d4af37; } /* Poudarki malce bolj svetli */
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Monad Harmony</h1>
+    <p style="opacity: 0.8;"><i>Lunar Calculator for Lunar Bdays and 9 cicles</i></p>
+
+    <div style="margin: 20px 0;">
+        <input type="date" id="datum" value="1975-11-21">
+        <button class="calc-btn" onclick="izracunaj()">UGLASITEV</button>
+    </div>
+
+    <div id="rezultat">
+        <p>• Lunarna leta: <b id="r1"></b></p>
+        <p>• Cikli zorenja (266 dni): <b id="r2"></b></p>
+        <p>• Naslednja biološka prenova: <b id="r3"></b></p>
+    </div>
+
+    <div class="grid">
+        <button class="f-btn" style="background:#ff0000" onclick="igraj(396, '396Hz: Osvobajanje strahu in prizemljitev.', '#200')">396 Hz</button>
+        <button class="f-btn" style="background:#ffa500; color:black;" onclick="igraj(417, '417Hz: Odpravljanje negativnosti in spremembe.', '#210')">417 Hz</button>
+        <button class="f-btn" style="background:#008000" onclick="igraj(528, '528Hz: Frekvenca ljubezni in popravljanje DNK.', '#020')">528 Hz</button>
+        <button class="f-btn" style="background:#0000ff" onclick="igraj(741, '741Hz: Čiščenje in izražanje duhovne resnice.', '#002')">741 Hz</button>
+        <button class="f-btn" style="background:#800080" onclick="igraj(963, '963Hz: Prebujanje enosti in vrnitev k Monadi.', '#202')">963 Hz</button>
+        <button class="f-btn" style="background:#ffffff; color:black;" onclick="igraj(432, '432Hz: Naravna uglasitev in notranji mir.', '#111')">432 Hz</button>
+    </div>
+
+    <button class="stop" onclick="ustavi()">USTAVI ZVOK</button>
+    <div id="info">Izberi frekvenco za opis delovanja.</div>
+
+    <div class="sig">KARAT DESIGN SOFT</div>
+</div>
+
+<script>
+    var avdio = null;
+    var oscilator = null;
+
+    function igraj(f, opis, barva) {
+        if (!avdio) { avdio = new (window.AudioContext || window.webkitAudioContext)(); }
+        if (avdio.state === 'suspended') { avdio.resume(); }
+        
+        ustavi();
+
+        document.body.style.background = barva;
+        document.getElementById('info').innerText = opis;
+
+        oscilator = avdio.createOscillator();
+        var ojacanje = avdio.createGain();
+        oscilator.frequency.value = f;
+        ojacanje.gain.value = 0.05;
+        oscilator.connect(ojacanje);
+        ojacanje.connect(avdio.destination);
+        oscilator.start();
+    }
+
+    function ustavi() {
+        if (oscilator) { oscilator.stop(); oscilator = null; }
+        document.body.style.background = "#05070a";
+        document.getElementById('info').innerText = "Izberi frekvenco za opis delovanja.";
+    }
+
+    function izracunaj() {
+        var d = new Date(document.getElementById('datum').value);
+        var danes = new Date();
+        var razlika = Math.floor((danes - d) / (1000 * 60 * 60 * 24));
+        var cikel = Math.floor(razlika / 266) + 1;
+        var naslednji = new Date(d);
+        naslednji.setDate(d.getDate() + (cikel * 266));
+
+        document.getElementById('r1').innerText = (razlika/354.37).toFixed(1);
+        document.getElementById('r2').innerText = (razlika/266).toFixed(1);
+        document.getElementById('r3').innerText = naslednji.toLocaleDateString('sl-SI');
+        document.getElementById('rezultat').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

@@ -20,7 +20,7 @@
 
 Aplikacija je popolnoma **brezplačna** in deluje neposredno v brskalniku brez namestitve.
 
-**Dostop do aplikacije:** [https://github.io](https://github.io)
-
+**Dostop do aplikacije:** [[https://github.io](https://github.io)
+](https://tetragrammatonresurrection-source.github.io/monad-harmony/)
 ## 🎨 Avtorstvo
 Ustvarjeno pod okriljem **KARAT DESIGN SOFT**.

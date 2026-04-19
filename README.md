@@ -1,3 +1,28 @@
+<p align="center">
+  <a href="https://github.io">
+    <img src="https://githubusercontent.com" alt="Monad Harmony Banner" width="100%">
+  </a>
+  <br>
+  <b>✨ Click the image above to launch Monad Harmony ✨</b>
+</p>
+
+---
+
+## 📱 Install as a Mobile App (PWA)
+Monad Harmony is a **Progressive Web App**, meaning you can install it on your phone for a full-screen, ad-free experience without using an App Store.
+
+### **For iPhone (iOS):**
+1. Open the [App Link](https://github.io) in **Safari**.
+2. Tap the **Share** button (square with an arrow).
+3. Scroll down and select **"Add to Home Screen"**.
+
+### **For Android:**
+1. Open the [App Link](https://github.io) in **Chrome**.
+2. Tap the **three dots (⋮)** in the top right corner.
+3. Select **"Install app"** or **"Add to Home screen"**.
+
+---
+
 🏛️ Tetragrammaton Resurrection Source
 
 Decoding the Geometry of Existence through Code & Frequency

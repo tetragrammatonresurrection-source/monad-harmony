@@ -23,29 +23,23 @@ A minimalist analytical sanctuary that synchronizes:
 I am constantly refining the algorithms and user experience of my tools. If you are using Monad Harmony, I value your insight. Feel free to open an Issue or start a Discussion here on GitHub to share your experience or suggest enhancements.
 
 "Everything is a number. Everything is resonance."
-# Monad Harmony 🌑✨
+Monad Harmony is a comprehensive web application designed for the holistic alignment of body and spirit. It merges ancient frequency wisdom, color therapy, and lunar cyclicity within an elegant, user-friendly interface.
+🌟 Key Features
 
-**Monad Harmony** je celovita spletna aplikacija za holistično uglasitev telesa in duha. Združuje starodavno znanje o frekvencah, barvno terapijo in lunarno cikliko v elegantnem, uporabniku prijaznem vmesniku.
+    Solfeggio Sound Therapy: A full spectrum of 9 therapeutic frequencies (from 174 Hz to 963 Hz) + the natural 432 Hz tuning.
+    Interactive Chromotherapy: Dynamic full-screen ambient color shifts based on the selected frequency for deep visual relaxation.
+    Lunar & Biological Calculator: Calculate lunar years and precise biological maturation cycles (based on 266-day cycles).
+    Frequency Wisdom: An integrated guide providing detailed descriptions of how each specific frequency impacts the body and mind.
+    Glassmorphism Design: A modern, premium aesthetic featuring a gold-and-black palette with translucent elements.
 
-## 🌟 Ključne funkcije
+🛠 Technologies
 
-- **Solfeggio zvočna terapija:** Celoten spekter 9 terapevtskih frekvenc (od 174 Hz do 963 Hz) + naravna uglasitev 432 Hz.
-- **Interaktivna kromoterapija:** Dinamično spreminjanje barvnega ambienta celotnega zaslona glede na izbrano frekvenco za globoko vizualno sprostitev.
-- **Lunarni & Biološki kalkulator:** Izračun lunarnih let in natančnih ciklov biološkega zorenja (266-dnevni cikli).
-- **Modrost frekvenc:** Integriran priročnik z opisi delovanja vsake posamezne frekvence na telo in duha.
-- **Glassmorphism dizajn:** Moderen, prestižen videz v zlato-črni estetiki s prosojnimi elementi.
+    HTML5 & CSS3: Responsive design utilizing glassmorphism effects and smooth color transitions.
+    JavaScript (Web Audio API): Generation of pure sine waves directly in the browser without external audio files.
+    Open Graph Protocol: Optimized for professional sharing across social media platforms (Facebook, WhatsApp).
 
-## 🛠 Tehnologije
-
-- **HTML5 & CSS3:** Odziven dizajn s "glassmorphism" učinki in gladkimi barvnimi prehodi.
-- **JavaScript (Web Audio API):** Generiranje čistih sinusnih tonov brez uporabe zunanjih zvočnih datotek.
-- **Open Graph Protocol:** Optimizirano za profesionalno deljenje na socialnih omrežjih (Facebook, WhatsApp).
-
-## 🚀 Uporaba
-
-Aplikacija je popolnoma **brezplačna** in deluje neposredno v brskalniku brez namestitve.
-
-**Dostop do aplikacije:** 
-(https://tetragrammatonresurrection-source.github.io/monad-harmony/)
-## 🎨 Avtorstvo
-Ustvarjeno pod okriljem **KARAT DESIGN SOFT**.
+🚀 Usage
+The application is completely free and runs directly in your browser with no installation required.
+Access the app: https://tetragrammatonresurrection-source.github.io/monad-harmony/
+🎨 Authorship
+Created under the auspices of Karat Design Soft.

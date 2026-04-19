@@ -1,9 +1,9 @@
+# 🕊️ Monad Harmony
+
+[![Monad Harmony Banner](og-image.jpg)](https://github.io)
+
 <p align="center">
-  <a href="https://github.io">
-    <img src="https://githubusercontent.com" alt="Monad Harmony Banner" width="100%">
-  </a>
-  <br>
-  <b>✨ Click the image above to launch Monad Harmony ✨</b>
+  <b>✨ Click the banner above to launch Monad Harmony ✨</b>
 </p>
 
 ---
@@ -22,6 +22,7 @@ Monad Harmony is a **Progressive Web App**, meaning you can install it on your p
 3. Select **"Install app"** or **"Add to Home screen"**.
 
 ---
+
 
 🏛️ Tetragrammaton Resurrection Source
 

@@ -3,40 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Monad Harmony</title>
+    <title>Monad Harmony - Lunar & Frequency Tuner</title>
     
-    <!-- Osnovni podatki -->
-<title>Monad Harmony - Lunar Date Calculator</title>
-<meta name="description" content="Natančen kalkulator datumov in numerologije - Gematrinator.com.">
+    <!-- Facebook / Open Graph (Original Working Version) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.io">
+    <meta property="og:title" content="Monad Harmony - Date Calculator">
+    <meta property="og:description" content="Izračunajte trajanje med datumi in numerološke vrednosti.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-<!-- Facebook / Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://github.io">
-<meta property="og:title" content="Monad Harmony - Date Calculator">
-<meta property="og:description" content="Izračunajte trajanje med datumi in numerološke vrednosti.">
-<meta property="og:image" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
-<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Monad Harmony - Date Calculator">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
-
-
-
-<!-- Meta oznaka za osveževanje na socialnih omrežjih -->
-<meta name="author" content="Monad Harmony">
-
-
-    <!-- PWA Nastavitve -->
+    <!-- PWA Settings -->
     <meta name="theme-color" content="#05070a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2305070a' stroke='%23d4af37' stroke-width='5'/><circle cx='50' cy='50' r='20' fill='%23d4af37'/></svg>">
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22MonadHarmony%22,%22short_name%22:%22Monad%22,%22display%22:%22standalone%22,%22background_color%22:%22#05070a%22,%22theme_color%22:%22#d4af37%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2305070a' stroke='%23d4af37' stroke-width='5'/><circle cx='50' cy='50' r='20' fill='%23d4af37'/></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
 
     <style>
         :root { --gold: #d4af37; --faza-color: rgba(214, 175, 55, 0.4); }
@@ -78,8 +61,8 @@
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
         .f-btn { padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.85em; background: rgba(255, 255, 255, 0.05); }
         
-        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 25px var(--gold); transform: scale(1.05); border-color: #fff; } }
         .suggested { animation: suggested-glow 1.5s infinite ease-in-out; border: 2px solid var(--gold) !important; }
+        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 25px var(--gold); transform: scale(1.05); border-color: #fff; } }
 
         input[type="date"] { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 220px; text-align: center; }
         .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; margin-top: 15px; }
@@ -106,10 +89,10 @@
 
 <div class="box" id="main-box">
     <h1>Monad Harmony</h1>
-    <div class="quote">"Vse je številka. Vse je resonanca."</div>
+    <div class="quote">"Everything is a number. Everything is resonance."</div>
     
     <div class="timer-container">
-        <label>Trajanje seanse:</label>
+        <label>Session Duration:</label>
         <div class="tempo-btns">
             <button class="t-btn" id="dur5" onclick="setDuration(5)">5 min</button>
             <button class="t-btn" id="dur10" onclick="setDuration(10)">10 min</button>
@@ -120,58 +103,76 @@
 
     <div class="tempo-container" id="tempoUI">
         <div class="tempo-btns">
-            <button class="t-btn" id="t8" onclick="setTempo(8)">SPROŠČENO (8s)</button>
-            <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONIJA (10s)</button>
-            <button class="t-btn" id="t12" onclick="setTempo(12)">GLOBOKO (12s)</button>
+            <button class="t-btn" id="t8" onclick="setTempo(8)">RELAX (8s)</button>
+            <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONY (10s)</button>
+            <button class="t-btn" id="t12" onclick="setTempo(12)">DEEP (12s)</button>
         </div>
     </div>
 
     <div class="breath-wrap" id="breathUI">
         <div class="circle" id="mainCircle">
-            <span id="breath-text">Vdih</span>
+            <span id="breath-text">Inhale</span>
         </div>
         <div id="remaining-time" style="margin-top: 15px; font-size: 0.85em; opacity: 0.8; font-weight: bold;"></div>
     </div>
 
-    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 45px;">Izberite frekvenco ali izračunajte uglasitev.</div>
+    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 45px;">Select frequency or tune your bio-rhythm.</div>
 
     <div class="grid">
-        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Varnost in mir.', '#0a0a1a')">174 Hz</button>
-        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Obnova polja.', '#1a1200')">285 Hz</button>
-        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Brez strahu.', '#350000')">396 Hz</button>
-        <button id="btn417" class="f-btn" style="background:rgba(210,130,0,0.6)" onclick="igraj(417, 'Sprememba.', '#351d00')">417 Hz</button>
-        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Harmonija.', '#121a12')">432 Hz</button>
-        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'Čudeži.', '#002500')">528 Hz</button>
-        <button id="btn639" class="f-btn" style="background:rgba(0,90,140,0.6)" onclick="igraj(639, 'Odnosi.', '#001825')">639 Hz</button>
-        <button id="btn741" class="f-btn" style="background:rgba(0,0,160,0.6)" onclick="igraj(741, 'Resnica.', '#000040')">741 Hz</button>
-        <button id="btn852" class="f-btn" style="background:rgba(100,0,160,0.6)" onclick="igraj(852, 'Intuicija.', '#200035')">852 Hz</button>
-        <button id="btn963" class="f-btn" style="background:rgba(160,0,160,0.6)" onclick="igraj(963, 'Enost.', '#350035')">963 Hz</button>
+        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Security and Peace.', '#0a0a1a')">174 Hz</button>
+        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Field Restoration.', '#1a1200')">285 Hz</button>
+        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Liberating Guilt/Fear.', '#350000')">396 Hz</button>
+        <button id="btn417" class="f-btn" style="background:rgba(210,130,0,0.6)" onclick="igraj(417, 'Facilitating Change.', '#351d00')">417 Hz</button>
+        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Natural Harmony.', '#121a12')">432 Hz</button>
+        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'Transformation/Miracles.', '#002500')">528 Hz</button>
+        <button id="btn639" class="f-btn" style="background:rgba(0,90,140,0.6)" onclick="igraj(639, 'Relationships/Unity.', '#001825')">639 Hz</button>
+        <button id="btn741" class="f-btn" style="background:rgba(0,0,160,0.6)" onclick="igraj(741, 'Intuition/Expression.', '#000040')">741 Hz</button>
+        <button id="btn852" class="f-btn" style="background:rgba(100,0,160,0.6)" onclick="igraj(852, 'Spiritual Order.', '#200035')">852 Hz</button>
+        <button id="btn963" class="f-btn" style="background:rgba(160,0,160,0.6)" onclick="igraj(963, 'Divine Consciousness.', '#350035')">963 Hz</button>
     </div>
 
     <div style="margin: 20px 0;">
         <input type="date" id="datum" value="1975-11-21">
-        <button class="calc-btn" onclick="izracunajVse()">UGLASI ME</button>
+        <button class="calc-btn" onclick="izracunajVse()">TUNE ME</button>
     </div>
 
     <div id="faza-box"></div>
 
+    <!-- INFO SECTIONS -->
     <div class="info-section">
-        <span class="info-title" onclick="toggleInfo('num-info')">▼ Numerologija Bioloških Ciklov</span>
+        <span class="info-title" onclick="toggleInfo('num-info')">▼ Bio-Cycle Numerology</span>
         <div id="num-info" class="info-content">
-            Vse v naravi niha v devetih fazah. Vaša <b>biološka faza</b> temelji na teozofski redukciji datuma. <br><br>
-            <b>Lunarna starost</b> upošteva lunarne cikle (354 dni), <b>Cikli prenove</b> pa beležijo vsako polno lunacijo (29.53 dni) od vašega rojstva.
+            Nature operates in 9 phases. Your <b>Biological Phase</b> is based on the theosophical reduction of your birth date. 
+            <b>Lunar Age</b> tracks cycles of 354 days, while <b>Renewal Cycles</b> record every full lunation (29.53 days) since birth.
         </div>
     </div>
 
     <div class="info-section">
-        <span class="info-title" onclick="toggleInfo('freq-info')">▼ Pomen Solfeggio Frekvenc</span>
-        <div id="freq-info" class="info-content">
-            • 174 Hz: Mir. • 285 Hz: Obnova. • 396 Hz: Strah. • 417 Hz: Sprememba. • 432 Hz: Narava. • 528 Hz: DNK. • 639 Hz: Odnosi. • 741 Hz: Celice. • 852 Hz: Intuicija. • 963 Hz: Zavest.
+        <span class="info-title" onclick="toggleInfo('about-app')">▼ About Monad Harmony</span>
+        <div id="about-app" class="info-content" style="text-align: center;">
+            <p>A holistic sanctuary for body and spirit alignment. 100% Free & Ad-free.</p>
+            <div style="text-align: left; font-size: 0.9em; margin: 10px 0;">
+                • Solfeggio & Chromotherapy integration.<br>
+                • 266-day biological maturation mapping.<br>
+                • Private: All data processed locally.<br>
+            </div>
+            <button class="t-btn" onclick="copyShareText()">📋 Share Invite Link</button>
+            <div style="margin-top:10px; font-size:0.8em; opacity:0.7;">Created by KARAT DESIGN SOFT</div>
         </div>
     </div>
 
-    <button id="stop-btn" class="stop" onclick="ustavi()">Ustavi seanso</button>
-    <button class="dl-btn" onclick="downloadApp()">Prenesi aplikacijo</button>
+    <div class="info-section">
+        <span class="info-title" onclick="toggleInfo('whats-new')">▼ What's New (v1.2)</span>
+        <div id="whats-new" class="info-content">
+            • Added English localization.<br>
+            • Integrated "Share Invite" feature.<br>
+            • Improved Bio-Cycle calculation accuracy.<br>
+            • New "About" section with developer credits.
+        </div>
+    </div>
+
+    <button id="stop-btn" class="stop" onclick="ustavi()">Stop Session</button>
+    <button class="dl-btn" onclick="downloadApp()">Download App</button>
 </div>
 
 <script>
@@ -195,6 +196,11 @@
     function toggleInfo(id) {
         const el = document.getElementById(id);
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function copyShareText() {
+        const text = "Discover your biological frequency with Monad Harmony. Free, ad-free, and designed for balance: https://github.io";
+        navigator.clipboard.writeText(text).then(() => alert("Link copied to clipboard!"));
     }
 
     function downloadApp() {
@@ -226,7 +232,6 @@
         gainNode = audioCtx.createGain();
         oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
         gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
         
@@ -248,7 +253,7 @@
         countdownInterval = setInterval(() => {
             timeLeft--;
             let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-            document.getElementById('remaining-time').innerText = `Preostalo: ${m}:${s.toString().padStart(2,'0')}`;
+            document.getElementById('remaining-time').innerText = `Remaining: ${m}:${s.toString().padStart(2,'0')}`;
             if(timeLeft <= 0) clearInterval(countdownInterval);
         }, 1000);
     }
@@ -264,9 +269,9 @@
         t.style.animation = `textFade ${s}s infinite ease-in-out`;
         
         clearInterval(breathInterval);
-        t.innerText = "Vdih";
+        t.innerText = "Inhale";
         breathInterval = setInterval(() => {
-            t.innerText = t.innerText === "Vdih" ? "Izdih" : "Vdih";
+            t.innerText = t.innerText === "Inhale" ? "Exhale" : "Inhale";
         }, (s / 2) * 1000);
     }
 
@@ -301,20 +306,20 @@
         const currentProgress = exactCycles % 1;
 
         let fazaOpis = "", tempo = 10;
-        if (currentProgress < 0.12 || currentProgress > 0.88) { fazaOpis = "Mlada luna (Novi začetki)"; tempo = 8; }
-        else if (currentProgress < 0.38) { fazaOpis = "Rastoča luna (Ekspanzija)"; tempo = 10; }
-        else if (currentProgress < 0.62) { fazaOpis = "Polna luna (Vrhunec energije)"; tempo = 12; }
-        else { fazaOpis = "Padajoča luna (Sproščanje)"; tempo = 10; }
+        if (currentProgress < 0.12 || currentProgress > 0.88) { fazaOpis = "New Moon (New Beginnings)"; tempo = 8; }
+        else if (currentProgress < 0.38) { fazaOpis = "Waxing Moon (Expansion)"; tempo = 10; }
+        else if (currentProgress < 0.62) { fazaOpis = "Full Moon (Peak Energy)"; tempo = 12; }
+        else { fazaOpis = "Waning Moon (Release)"; tempo = 10; }
 
         setTempo(tempo);
         const fazaBox = document.getElementById('faza-box');
         fazaBox.style.display = 'block';
         fazaBox.innerHTML = `
-            <strong>BIOLOŠKA FAZA: ${st}</strong><br>
-            Skupaj živite: ${diffDays.toLocaleString()} dni<br>
-            Lunarna starost: ${lunarAge} let<br>
-            Cikli prenove: ${exactCycles.toFixed(2)}. lunacija<br>
-            <span style="color:#fff; font-size:0.85em; opacity:0.9;">Trenutni vpliv: ${fazaOpis}</span>
+            <strong>BIO-PHASE: ${st}</strong><br>
+            Total Days Lived: ${diffDays.toLocaleString()}<br>
+            Lunar Age: ${lunarAge} years<br>
+            Renewal Cycles: ${exactCycles.toFixed(2)} lunations<br>
+            <span style="color:#fff; font-size:0.85em; opacity:0.9;">Influence: ${fazaOpis}</span>
         `;
         
         document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));

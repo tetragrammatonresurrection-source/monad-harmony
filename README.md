@@ -1,27 +1,40 @@
 # 🕊️ Monad Harmony
 
-[![Monad Harmony Banner](og-image.jpg)](https://github.io)
-
 <p align="center">
-  <b>✨ Click the banner above to launch Monad Harmony ✨</b>
+  <a href="https://github.io">
+    <img src="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg" alt="Monad Harmony Banner" width="100%">
+  </a>
+  <br>
+  <p align="center">
+  <p align="center">
+  <a href="https://tetragrammatonresurrection-source.github.io/monad-harmony/">CLICK HERE TO LAUNCH THE LIVE APPLICATION</a>
+
+
+## 📱 Universal Compatibility
+Monad Harmony is a fully responsive web application. It is professionally optimized to work seamlessly across **all devices**, including **Desktops, Tablets, and Smartphones** (iOS & Android). The interface automatically adjusts to provide a high-fidelity experience on any screen size.
+
+---
+
+## 📲 Install as a Mobile App
+You can add **Monad Harmony** to your home screen and use it like a regular app. No App Store or Play Store is required—it runs directly through your browser as a high-performance PWA.
+
+### **For iPhone (Safari):**
+1. Open: **[https://github.io](https://tetragrammatonresurrection-source.github.io/monad-harmony/)**
+2. Tap the **Share icon** (the square with an arrow) at the bottom.
+3. Scroll down and tap **"Add to Home Screen"**.
+
+### **For Android (Chrome):**
+1. Open: **[https://github.io](https://tetragrammatonresurrection-source.github.io/monad-harmony/)**
+2. Tap the **Menu icon** (three dots ⋮) in the top right corner.
+3. Tap **"Install app"** or **"Add to Home screen"**.
+
+---
+<p align="center">
+  Created by <b>Karat Design Soft</b>
 </p>
 
----
 
-## 📱 Install as a Mobile App (PWA)
-Monad Harmony is a **Progressive Web App**, meaning you can install it on your phone for a full-screen, ad-free experience without using an App Store.
 
-### **For iPhone (iOS):**
-1. Open the [App Link](https://github.io) in **Safari**.
-2. Tap the **Share** button (square with an arrow).
-3. Scroll down and select **"Add to Home Screen"**.
-
-### **For Android:**
-1. Open the [App Link](https://github.io) in **Chrome**.
-2. Tap the **three dots (⋮)** in the top right corner.
-3. Select **"Install app"** or **"Add to Home screen"**.
-
----
 
 
 🏛️ Tetragrammaton Resurrection Source

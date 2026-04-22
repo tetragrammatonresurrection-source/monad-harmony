@@ -21,73 +21,70 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+
+    <!-- PWA & MOBILE SETTINGS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#05070a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
         :root { --gold: #d4af37; --faza-color: rgba(214, 175, 55, 0.4); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body { 
             background: #05070a; color: var(--gold); font-family: 'Georgia', serif; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             min-height: 100vh; margin: 0; padding: 40px 0; overflow-x: hidden;
-            scrollbar-width: none; -ms-overflow-style: none; transition: background 1.5s ease;}
+            scrollbar-width: none; transition: background 1.5s ease;}
         body::-webkit-scrollbar { display: none; }
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-
+        
         .box { 
-            background: rgba(10, 15, 25, 0.45); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(214, 175, 55, 0.4); padding: 30px; border-radius: 24px; 
-            max-width: 650px; width: 92%; text-align: center; 
-            box-shadow: 0 0 60px -15px var(--faza-color);
-            z-index: 10; margin: 20px auto; transition: all 1s ease;
-        }
-
-        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; }
+            background: rgba(10, 15, 25, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(214, 175, 55, 0.3); padding: 30px; border-radius: 24px; 
+            max-width: 650px; width: 92%; text-align: center; box-shadow: 0 0 60px -15px var(--faza-color);
+            z-index: 10; margin: 20px auto; }
+        
+        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         .quote { font-size: 0.85em; font-style: italic; opacity: 0.7; margin: 5px 0 15px 0; letter-spacing: 1px; }
 
-        .timer-container { margin: 10px 0; font-size: 0.8em; opacity: 0.9; }
-        .tempo-container { margin: 15px 0; display: none; }
+        .timer-container { margin: 10px 0; font-size: 0.8em; }
         .tempo-btns { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-        
-        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 10px; border-radius: 8px; font-size: 0.7em; cursor: pointer; transition: 0.3s; }
+        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.7em; cursor: pointer; transition: 0.3s; }
         .t-btn.active { border-color: var(--gold); background: rgba(214,175,55,0.2); box-shadow: 0 0 10px var(--faza-color); }
-
-        .breath-wrap { margin: 25px 0; display: none; }
-        .circle { width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-        #breath-text { font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
-
-        @keyframes breathe { 0%, 100% { transform: scale(0.75); opacity: 0.2; } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 60px var(--gold); } }
-        @keyframes textFade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
+        
+        .breath-wrap { margin: 30px 0; display: none; }
+        .circle { width: 120px; height: 120px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; }
+        #breath-text { font-size: 0.9em; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; color: #fff; text-shadow: 0 0 8px #000; }
+        
+        .moon-display { width: 55px; height: 55px; border: 1px solid var(--faza-color); border-radius: 50%; position: relative; overflow: hidden; background: #000; }
+        .moon-disk { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--gold); transition: all 1s ease; opacity: 0.9; box-shadow: 0 0 15px var(--faza-color); }
+        
+        @keyframes breathe { 0%, 100% { transform: scale(0.7); opacity: 0.3; } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 70px var(--gold); } }
+        
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
         .f-btn { padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.85em; background: rgba(255, 255, 255, 0.05); }
-        
         .suggested { animation: suggested-glow 1.5s infinite ease-in-out; border: 2px solid var(--gold) !important; }
-        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 25px var(--gold); transform: scale(1.05); border-color: #fff; } }
-
+        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 20px var(--gold); transform: scale(1.05); } }
+        
         input[type="date"] { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 220px; text-align: center; }
         .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; margin-top: 15px; }
-
-        #faza-box { background: rgba(212, 175, 55, 0.1); padding: 25px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 20px 0; display: none; text-align: left; backdrop-filter: blur(5px); }
         
-        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; display: block; color: #fff; }
-        .info-content { display: none; margin-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 10px; color: #eee; line-height: 1.6; }
-
-        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ff4444; cursor: pointer; margin-top: 15px; display: none; font-weight: bold; }
+        #faza-box { background: rgba(212, 175, 55, 0.1); padding: 20px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 20px 0; display: none; text-align: left; }
+        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; border: 1px solid rgba(212, 175, 55, 0.15); }
+        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; color: var(--gold); display: block; }
+        .info-content { display: none; margin-top: 12px; color: #eee; line-height: 1.5; }
         
-        .dl-btn { 
-            background: rgba(212, 175, 55, 0.1); color: var(--gold); border: 1px solid var(--gold); 
-            padding: 10px 20px; border-radius: 12px; cursor: pointer; margin-top: 30px; 
-            font-size: 0.75em; transition: 0.3s; font-weight: bold;
-        }
-        .dl-btn:hover { background: var(--gold); color: #000; }
+        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; margin-top: 15px; display: none; font-weight: bold; }
+        .dl-btn { background: rgba(212, 175, 55, 0.1); color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 12px; cursor: pointer; margin-top: 30px; font-size: 0.75em; transition: 0.3s; font-weight: bold;}
+        .credits { color: var(--gold); font-size: 0.7em; margin-top: 20px; opacity: 0.8; letter-spacing: 2px; font-variant: small-caps; font-weight: bold; }
     </style>
 </head>
 <body onload="checkSavedData()">
 
 <canvas id="particles"></canvas>
 
-<div class="box" id="main-box">
+<div class="box">
     <h1>Monad Harmony</h1>
     <div class="quote">"Everything is a number. Everything is resonance."</div>
     
@@ -96,39 +93,33 @@
         <div class="tempo-btns">
             <button class="t-btn" id="dur5" onclick="setDuration(5)">5 min</button>
             <button class="t-btn" id="dur10" onclick="setDuration(10)">10 min</button>
-            <button class="t-btn" id="dur15" onclick="setDuration(15)">15 min</button>
             <button class="t-btn" id="dur20" onclick="setDuration(20)">20 min</button>
         </div>
     </div>
 
-    <div class="tempo-container" id="tempoUI">
-        <div class="tempo-btns">
+    <div class="breath-wrap" id="breathUI">
+        <div class="circle" id="mainCircle"><span id="breath-text">Inhale</span></div>
+        <div id="remaining-time" style="margin-top: 15px; font-size: 0.85em; font-weight: bold;"></div>
+        <div class="tempo-btns" id="tempoUI" style="margin-top:20px;">
             <button class="t-btn" id="t8" onclick="setTempo(8)">RELAX (8s)</button>
             <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONY (10s)</button>
             <button class="t-btn" id="t12" onclick="setTempo(12)">DEEP (12s)</button>
         </div>
     </div>
 
-    <div class="breath-wrap" id="breathUI">
-        <div class="circle" id="mainCircle">
-            <span id="breath-text">Inhale</span>
-        </div>
-        <div id="remaining-time" style="margin-top: 15px; font-size: 0.85em; opacity: 0.8; font-weight: bold;"></div>
-    </div>
-
-    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 45px;">Select frequency or tune your bio-rhythm.</div>
+    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 40px;">Select frequency or tune your bio-rhythm.</div>
 
     <div class="grid">
-        <button id="btn174" class="f-btn" style="background:rgba(50,50,50,0.6)" onclick="igraj(174, 'Security and Peace.', '#0a0a1a')">174 Hz</button>
-        <button id="btn285" class="f-btn" style="background:rgba(120,70,0,0.6)" onclick="igraj(285, 'Field Restoration.', '#1a1200')">285 Hz</button>
-        <button id="btn396" class="f-btn" style="background:rgba(180,0,0,0.6)" onclick="igraj(396, 'Liberating Guilt/Fear.', '#350000')">396 Hz</button>
-        <button id="btn417" class="f-btn" style="background:rgba(210,130,0,0.6)" onclick="igraj(417, 'Facilitating Change.', '#351d00')">417 Hz</button>
-        <button id="btn432" class="f-btn" style="background:rgba(75,75,75,0.6)" onclick="igraj(432, 'Natural Harmony.', '#121a12')">432 Hz</button>
-        <button id="btn528" class="f-btn" style="background:rgba(0,120,0,0.6)" onclick="igraj(528, 'Transformation/Miracles.', '#002500')">528 Hz</button>
-        <button id="btn639" class="f-btn" style="background:rgba(0,90,140,0.6)" onclick="igraj(639, 'Relationships/Unity.', '#001825')">639 Hz</button>
-        <button id="btn741" class="f-btn" style="background:rgba(0,0,160,0.6)" onclick="igraj(741, 'Intuition/Expression.', '#000040')">741 Hz</button>
-        <button id="btn852" class="f-btn" style="background:rgba(100,0,160,0.6)" onclick="igraj(852, 'Spiritual Order.', '#200035')">852 Hz</button>
-        <button id="btn963" class="f-btn" style="background:rgba(160,0,160,0.6)" onclick="igraj(963, 'Divine Consciousness.', '#350035')">963 Hz</button>
+        <button id="btn174" class="f-btn" style="background:rgba(20,20,40,0.6)" onclick="igraj(174, 'Security and Peace.', '#050510')">174 Hz</button>
+        <button id="btn285" class="f-btn" style="background:rgba(60,40,0,0.6)" onclick="igraj(285, 'Field Restoration.', '#100800')">285 Hz</button>
+        <button id="btn396" class="f-btn" style="background:rgba(80,0,0,0.6)" onclick="igraj(396, 'Liberating Guilt/Fear.', '#150000')">396 Hz</button>
+        <button id="btn417" class="f-btn" style="background:rgba(90,50,0,0.6)" onclick="igraj(417, 'Facilitating Change.', '#181000')">417 Hz</button>
+        <button id="btn432" class="f-btn" style="background:rgba(40,40,40,0.6)" onclick="igraj(432, 'Natural Harmony.', '#0a0a0a')">432 Hz</button>
+        <button id="btn528" class="f-btn" style="background:rgba(0,60,0,0.6)" onclick="igraj(528, 'Transformation/Miracles.', '#001000')">528 Hz</button>
+        <button id="btn639" class="f-btn" style="background:rgba(0,50,80,0.6)" onclick="igraj(639, 'Relationships/Unity.', '#000815')">639 Hz</button>
+        <button id="btn741" class="f-btn" style="background:rgba(0,0,80,0.6)" onclick="igraj(741, 'Intuition/Expression.', '#000015')">741 Hz</button>
+        <button id="btn852" class="f-btn" style="background:rgba(60,0,100,0.6)" onclick="igraj(852, 'Spiritual Order.', '#100018')">852 Hz</button>
+        <button id="btn963" class="f-btn" style="background:rgba(100,0,100,0.6)" onclick="igraj(963, 'Divine Consciousness.', '#150015')">963 Hz</button>
     </div>
 
     <div style="margin: 20px 0;">
@@ -138,57 +129,45 @@
 
     <div id="faza-box"></div>
 
-    <!-- INFO SECTIONS -->
     <div class="info-section">
         <span class="info-title" onclick="toggleInfo('num-info')">▼ Bio-Cycle Numerology</span>
         <div id="num-info" class="info-content">
-            Nature operates in 9 phases. Your <b>Biological Phase</b> is based on the theosophical reduction of your birth date. 
-            <b>Lunar Age</b> tracks cycles of 354 days, while <b>Renewal Cycles</b> record every full lunation (29.53 days) since birth.
+            Nature operates in cycles. Your <b>Bio-Phase</b> is based on the theosophical reduction of your birth date. We also track your <b>Renewal Count</b>—every full lunation (29.53 days) your body has experienced since birth, helping you align with your natural internal tides.
         </div>
     </div>
 
     <div class="info-section">
         <span class="info-title" onclick="toggleInfo('about-app')">▼ About Monad Harmony</span>
-        <div id="about-app" class="info-content" style="text-align: center;">
-            <p>A holistic sanctuary for body and spirit alignment. 100% Free & Ad-free.</p>
-            <div style="text-align: left; font-size: 0.9em; margin: 10px 0;">
-                • Solfeggio & Chromotherapy integration.<br>
-                • 266-day biological maturation mapping.<br>
-                • Private: All data processed locally.<br>
-            </div>
-            <button class="t-btn" onclick="copyShareText()">📋 Share Invite Link</button>
-            <div style="margin-top:10px; font-size:0.8em; opacity:0.7;">Created by KARAT DESIGN SOFT</div>
-        </div>
-    </div>
-
-    <div class="info-section">
-        <span class="info-title" onclick="toggleInfo('whats-new')">▼ What's New (v1.2)</span>
-        <div id="whats-new" class="info-content">
-            • Added English localization.<br>
-            • Integrated "Share Invite" feature.<br>
-            • Improved Bio-Cycle calculation accuracy.<br>
-            • New "About" section with developer credits.
+        <div id="about-app" class="info-content">
+            A sanctuary for body and spirit alignment using all 10 Solfeggio frequencies. Pair these tones with rhythmic breathing to return your bio-field to its original blueprint of harmony.
         </div>
     </div>
 
     <button id="stop-btn" class="stop" onclick="ustavi()">Stop Session</button>
+    
     <button class="dl-btn" onclick="downloadApp()">Download App</button>
+    <div class="credits">Karat Design Soft</div>
 </div>
 
 <script>
-    let audioCtx, oscillator, gainNode, breathInterval, sessionTimeout, countdownInterval;
+    let audioCtx, oscillator, gainNode, breathTimeout, countdownInterval;
     let currentTempo = 10, sessionMinutes = 10;
+
+    // REGISTER SERVICE WORKER
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        });
+    }
 
     function checkSavedData() {
         const d = localStorage.getItem('monad_date');
-        const dur = localStorage.getItem('monad_dur');
         if(d) { document.getElementById('datum').value = d; izracunajVse(); }
-        setDuration(dur ? parseInt(dur) : 10);
+        setDuration(10);
     }
 
     function setDuration(m) {
         sessionMinutes = m;
-        localStorage.setItem('monad_dur', m);
         document.querySelectorAll('.timer-container .t-btn').forEach(b => b.classList.remove('active'));
         const b = document.getElementById('dur' + m); if(b) b.classList.add('active');
     }
@@ -198,9 +177,96 @@
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
-    function copyShareText() {
-        const text = "Discover your biological frequency with Monad Harmony. Free, ad-free, and designed for balance: https://github.io";
-        navigator.clipboard.writeText(text).then(() => alert("Link copied to clipboard!"));
+    function igraj(freq, msg, bg) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        ustavi();
+        oscillator = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
+        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
+        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
+        oscillator.start();
+        document.getElementById('afirmacija').innerText = msg;
+        document.getElementById('breathUI').style.display = 'block';
+        document.getElementById('stop-btn').style.display = 'block';
+        document.body.style.background = bg;
+        setTempo(currentTempo);
+        let timeLeft = sessionMinutes * 60;
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            let m = Math.floor(timeLeft/60), s = timeLeft%60;
+            document.getElementById('remaining-time').innerText = `Remaining: ${m}:${s.toString().padStart(2,'0')}`;
+            if(timeLeft <= 0) { ustavi(); playBell(); }
+        }, 1000);
+    }
+
+    function setTempo(s) {
+        currentTempo = s;
+        const c = document.getElementById('mainCircle'), t = document.getElementById('breath-text');
+        document.querySelectorAll('#tempoUI .t-btn').forEach(b => b.classList.remove('active'));
+        const btn = document.getElementById('t' + s); if(btn) btn.classList.add('active');
+        
+        c.style.animation = 'none'; c.offsetHeight; 
+        c.style.animation = `breathe ${s}s infinite ease-in-out`;
+        
+        clearTimeout(breathTimeout);
+        function loopBreath() {
+            t.innerText = "Inhale";
+            breathTimeout = setTimeout(() => {
+                t.innerText = "Exhale";
+                breathTimeout = setTimeout(loopBreath, (s/2) * 1000);
+            }, (s/2) * 1000);
+        }
+        loopBreath();
+    }
+
+    function ustavi() {
+        if(oscillator) {
+            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+            setTimeout(() => { try { oscillator.stop(); } catch(e){} }, 500);
+            oscillator = null;
+        }
+        clearTimeout(breathTimeout); clearInterval(countdownInterval);
+        document.getElementById('breathUI').style.display = 'none';
+        document.getElementById('stop-btn').style.display = 'none';
+        document.body.style.background = "#05070a";
+    }
+
+    function izracunajVse() {
+        const d = document.getElementById('datum').value; if(!d) return;
+        localStorage.setItem('monad_date', d);
+        let st = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0);
+        while(st > 9) st = st.toString().split('').reduce((a,b)=>a+parseInt(b),0);
+
+        const now = new Date();
+        const LUNAR_MONTH = 29.530588853; 
+        const jdNow = (now.getTime() / 86400000) + 2440587.5;
+        const normProgress = ((jdNow - 2451550.1) / LUNAR_MONTH) % 1;
+        const p = normProgress < 0 ? normProgress + 1 : normProgress;
+        const illumination = Math.abs(p - 0.5) * 2; 
+        const percentLit = Math.round((1 - illumination) * 100);
+
+        const birth = new Date(d);
+        const diffDays = Math.floor((now - birth) / (1000*60*60*24));
+        const fazaBox = document.getElementById('faza-box');
+        fazaBox.style.display = 'block';
+        fazaBox.innerHTML = `
+            <div style="display:flex; align-items:center; gap:15px; border-bottom:1px solid var(--faza-color); padding-bottom:10px; margin-bottom:10px;">
+                <div class="moon-display"><div class="moon-disk" style="left: ${(p < 0.5 ? (100-percentLit) : -(100-percentLit))}%"></div></div>
+                <div><strong style="color:#fff;">SKY LUNA: ${percentLit}%</strong><br><span style="font-size:0.8em;">Current Illumination</span></div>
+            </div>
+            <strong>BIO-PHASE: ${st}</strong><br>
+            Total Days Lived: ${diffDays.toLocaleString()}<br>
+            Lunar Age: ${(diffDays / 354.36).toFixed(2)} years<br>
+            Renewal Count: ${(diffDays/29.53).toFixed(2)} lunations
+        `;
+        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));
+        const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
+        const closest = frqs.reduce((prev, curr) => Math.abs(curr - (st * 100)) < Math.abs(prev - (st * 100)) ? curr : prev);
+        const target = document.getElementById('btn' + closest);
+        if(target) target.classList.add('suggested');
     }
 
     function downloadApp() {
@@ -213,127 +279,20 @@
     }
 
     function playBell() {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
-        osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 3);
-        g.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 4);
-        osc.connect(g); g.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 4);
-    }
-
-    function igraj(freq, msg, bg) {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        ustavi();
-
-        oscillator = audioCtx.createOscillator();
-        gainNode = audioCtx.createGain();
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.start();
-
-        document.getElementById('afirmacija').innerText = msg;
-        document.getElementById('breathUI').style.display = 'block';
-        document.getElementById('tempoUI').style.display = 'block';
-        document.getElementById('stop-btn').style.display = 'block';
-        document.body.style.background = bg;
-        
-        setTempo(currentTempo);
-
-        let timeLeft = sessionMinutes * 60;
-        sessionTimeout = setTimeout(() => { ustavi(); playBell(); }, timeLeft * 1000);
-        
-        countdownInterval = setInterval(() => {
-            timeLeft--;
-            let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-            document.getElementById('remaining-time').innerText = `Remaining: ${m}:${s.toString().padStart(2,'0')}`;
-            if(timeLeft <= 0) clearInterval(countdownInterval);
-        }, 1000);
-    }
-
-    function setTempo(s) {
-        currentTempo = s;
-        const c = document.getElementById('mainCircle'), t = document.getElementById('breath-text');
-        document.querySelectorAll('#tempoUI .t-btn').forEach(b => b.classList.remove('active'));
-        const btn = document.getElementById('t' + s); if(btn) btn.classList.add('active');
-        
-        c.style.animation = 'none'; t.style.animation = 'none'; c.offsetHeight; 
-        c.style.animation = `breathe ${s}s infinite ease-in-out`;
-        t.style.animation = `textFade ${s}s infinite ease-in-out`;
-        
-        clearInterval(breathInterval);
-        t.innerText = "Inhale";
-        breathInterval = setInterval(() => {
-            t.innerText = t.innerText === "Inhale" ? "Exhale" : "Inhale";
-        }, (s / 2) * 1000);
-    }
-
-    function ustavi() {
-        if(oscillator) {
-            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
-            const oldOsc = oscillator;
-            setTimeout(() => { try { oldOsc.stop(); } catch(e){} }, 500);
-            oscillator = null;
-        }
-        clearInterval(breathInterval);
-        clearInterval(countdownInterval);
-        clearTimeout(sessionTimeout);
-        document.getElementById('breathUI').style.display = 'none';
-        document.getElementById('tempoUI').style.display = 'none';
-        document.getElementById('stop-btn').style.display = 'none';
-        document.body.style.background = "#05070a";
-    }
-
-    function izracunajVse() {
-        const d = document.getElementById('datum').value; if(!d) return;
-        localStorage.setItem('monad_date', d);
-
-        let st = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0);
-        while(st > 9) st = st.toString().split('').reduce((a,b)=>a+parseInt(b),0);
-
-        const birth = new Date(d);
-        const now = new Date();
-        const diffDays = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
-        const lunarAge = (diffDays / 354.36).toFixed(2);
-        const exactCycles = diffDays / 29.53059;
-        const currentProgress = exactCycles % 1;
-
-        let fazaOpis = "", tempo = 10;
-        if (currentProgress < 0.12 || currentProgress > 0.88) { fazaOpis = "New Moon (New Beginnings)"; tempo = 8; }
-        else if (currentProgress < 0.38) { fazaOpis = "Waxing Moon (Expansion)"; tempo = 10; }
-        else if (currentProgress < 0.62) { fazaOpis = "Full Moon (Peak Energy)"; tempo = 12; }
-        else { fazaOpis = "Waning Moon (Release)"; tempo = 10; }
-
-        setTempo(tempo);
-        const fazaBox = document.getElementById('faza-box');
-        fazaBox.style.display = 'block';
-        fazaBox.innerHTML = `
-            <strong>BIO-PHASE: ${st}</strong><br>
-            Total Days Lived: ${diffDays.toLocaleString()}<br>
-            Lunar Age: ${lunarAge} years<br>
-            Renewal Cycles: ${exactCycles.toFixed(2)} lunations<br>
-            <span style="color:#fff; font-size:0.85em; opacity:0.9;">Influence: ${fazaOpis}</span>
-        `;
-        
-        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));
-        const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
-        const closest = frqs.reduce((p, c) => Math.abs(c - (st * 100)) < Math.abs(p - (st * 100)) ? c : p);
-        const targetBtn = document.getElementById('btn' + closest);
-        if(targetBtn) targetBtn.classList.add('suggested');
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.setValueAtTime(150, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(); o.stop(ctx.currentTime + 3);
     }
 
     const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let ps = []; for(let i=0; i<45; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.4});
+    let ps = []; for(let i=0; i<50; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.3});
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     function anim() {
-        ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(212,175,55,0.25)";
+        ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(214,175,55,0.2)";
         ps.forEach(p => { p.y -= p.v; if(p.y<0) p.y=canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); });
         requestAnimationFrame(anim);
     } anim();

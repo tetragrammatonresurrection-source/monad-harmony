@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Monad Harmony - Lunar & Frequency Tuner</title>
     
-    <!-- Facebook / Open Graph (Original Working Version) -->
+    <!-- PRIMARY META -->
+    <meta name="title" content="Monad Harmony - Lunar & Frequency Tuner">
+    <meta name="description" content="Personalized Solfeggio frequencies and lunar bio-rhythm tuning.">
+
+    <!-- FAVICON & ICONS -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="logo512.png">
+
+    <!-- FACEBOOK / OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://github.io">
-    <meta property="og:title" content="Monad Harmony - Date Calculator">
-    <meta property="og:description" content="Izračunajte trajanje med datumi in numerološke vrednosti.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="Monad Harmony - Date Calculator & Resonance">
+    <meta property="og:description" content="Izračunajte trajanje med datumi, lunarno starost in numerološke vrednosti.">
+    <meta property="og:image" content="og-image.jpg">
 
-    <!-- PWA Settings -->
-    <meta name="theme-color" content="#05070a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-
-    <!-- PWA & MOBILE SETTINGS -->
+    <!-- PWA SETTINGS -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#05070a">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -132,7 +131,7 @@
     <div class="info-section">
         <span class="info-title" onclick="toggleInfo('num-info')">▼ Bio-Cycle Numerology</span>
         <div id="num-info" class="info-content">
-            Nature operates in cycles. Your <b>Bio-Phase</b> is based on the theosophical reduction of your birth date. We also track your <b>Renewal Count</b>—every full lunation (29.53 days) your body has experienced since birth, helping you align with your natural internal tides.
+            Nature operates in cycles. Your <b>Bio-Phase</b> is based on the theosophical reduction of your birth date. We also track your <b>Renewal Count</b>—every full lunation (29.53 days) your body has experienced since birth.
         </div>
     </div>
 
@@ -144,7 +143,6 @@
     </div>
 
     <button id="stop-btn" class="stop" onclick="ustavi()">Stop Session</button>
-    
     <button class="dl-btn" onclick="downloadApp()">Download App</button>
     <div class="credits">Karat Design Soft</div>
 </div>
@@ -153,7 +151,7 @@
     let audioCtx, oscillator, gainNode, breathTimeout, countdownInterval;
     let currentTempo = 10, sessionMinutes = 10;
 
-    // REGISTER SERVICE WORKER
+    // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('sw.js').catch(() => {});
@@ -214,6 +212,7 @@
         clearTimeout(breathTimeout);
         function loopBreath() {
             t.innerText = "Inhale";
+            // Correct synchronization: text changes to Exhale at exactly half cycle
             breathTimeout = setTimeout(() => {
                 t.innerText = "Exhale";
                 breathTimeout = setTimeout(loopBreath, (s/2) * 1000);

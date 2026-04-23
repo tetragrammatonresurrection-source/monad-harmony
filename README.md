@@ -1,4 +1,4 @@
-# 🕊️ Monad Harmony
+# 🕊️ Monad Harmony - Quantum Resonance Tuner
 
 <p align="center">
   <a href="https://github.io">

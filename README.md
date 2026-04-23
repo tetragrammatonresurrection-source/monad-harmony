@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.io">
-    <img src="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.jpg" alt="Monad Harmony Banner" width="100%">
+    <img src="https://raw.githubusercontent.com/tetragrammatonresurrection-source/monad-harmony/refs/heads/main/og-image.png" alt="Monad Harmony Banner" width="100%">
   </a>
   <br>
   <p align="center">

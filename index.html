@@ -3,298 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Monad Harmony - Lunar & Frequency Tuner</title>
+    <title>Monad Harmony - Quantum Resonance Tuner</title>
     
-    <!-- PRIMARY META -->
-    <meta name="title" content="Monad Harmony - Lunar & Frequency Tuner">
-    <meta name="description" content="Personalized Solfeggio frequencies and lunar bio-rhythm tuning.">
-
-    <!-- FAVICON & ICONS -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="logo512.png">
-
-    <!-- FACEBOOK / OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.io">
-    <meta property="og:title" content="Monad Harmony - Date Calculator & Resonance">
-    <meta property="og:description" content="Izračunajte trajanje med datumi, lunarno starost in numerološke vrednosti.">
-    <meta property="og:image" content="og-image.jpg">
-
-    <!-- PWA SETTINGS -->
+    <!-- PWA NASTAVITVE (Mobile App Mode) -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#05070a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MonadHarmony">
+    <link rel="apple-touch-icon" href="logo512.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- SOCIAL MEDIA META DATA (OpenGraph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Monad Harmony - Quantum Tuner">
+    <meta property="og:description" content="Align your essence with precision lunar algorithms and Solfeggio resonance.">
+    <meta property="og:image" content="og-image.png">
+    <meta property="og:url" content="https://tvoja-domena.com">
+    
+    <!-- TWITTER META DATA -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monad Harmony">
+    <meta name="twitter:description" content="Quantum Lunar & Frequency Alignment.">
+    <meta name="twitter:image" content="og-image.png">
+
+    <!-- MISTIC FONTS -->
+    <link href="https://googleapis.com" rel="stylesheet">
 
     <style>
-        :root { --gold: #d4af37; --faza-color: rgba(214, 175, 55, 0.4); }
+        :root { --gold: #d4af37; --soft-gold: #f4e1a1; --faza-color: rgba(214, 175, 55, 0.4); --mystic-bg: rgba(10, 15, 25, 0.95); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { 
-            background: #05070a; color: var(--gold); font-family: 'Georgia', serif; 
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            min-height: 100vh; margin: 0; padding: 40px 0; overflow-x: hidden;
-            scrollbar-width: none; transition: background 1.5s ease;}
-        body::-webkit-scrollbar { display: none; }
+        body { background: #05070a; color: var(--soft-gold); font-family: 'Quicksand', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px 0; overflow-x: hidden; }
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        
-        .box { 
-            background: rgba(10, 15, 25, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(214, 175, 55, 0.3); padding: 30px; border-radius: 24px; 
-            max-width: 650px; width: 92%; text-align: center; box-shadow: 0 0 60px -15px var(--faza-color);
-            z-index: 10; margin: 20px auto; }
-        
-        h1 { font-variant: small-caps; letter-spacing: 4px; margin: 0; font-size: 1.8em; color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-        .quote { font-size: 0.85em; font-style: italic; opacity: 0.7; margin: 5px 0 15px 0; letter-spacing: 1px; }
-
-        .timer-container { margin: 10px 0; font-size: 0.8em; }
-        .tempo-btns { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-        .t-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(214,175,55,0.3); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.7em; cursor: pointer; transition: 0.3s; }
-        .t-btn.active { border-color: var(--gold); background: rgba(214,175,55,0.2); box-shadow: 0 0 10px var(--faza-color); }
-        
-        .breath-wrap { margin: 30px 0; display: none; }
-        .circle { width: 120px; height: 120px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; }
-        #breath-text { font-size: 0.9em; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; color: #fff; text-shadow: 0 0 8px #000; }
-        
-        .moon-display { width: 55px; height: 55px; border: 1px solid var(--faza-color); border-radius: 50%; position: relative; overflow: hidden; background: #000; }
-        .moon-disk { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--gold); transition: all 1s ease; opacity: 0.9; box-shadow: 0 0 15px var(--faza-color); }
-        
-        @keyframes breathe { 0%, 100% { transform: scale(0.7); opacity: 0.3; } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 70px var(--gold); } }
-        
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .f-btn { padding: 16px 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-weight: bold; transition: 0.3s; font-size: 0.85em; background: rgba(255, 255, 255, 0.05); }
+        .box { background: var(--mystic-bg); backdrop-filter: blur(25px); border: 1px solid rgba(214, 175, 55, 0.25); padding: 25px; border-radius: 30px; max-width: 650px; width: 92%; text-align: center; box-shadow: 0 0 60px -20px var(--gold); z-index: 10; margin-bottom: 20px; }
+        h1 { font-family: 'Cinzel', serif; letter-spacing: 5px; margin: 0; font-size: 1.7em; color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+        .quote { font-size: 0.8em; font-style: italic; opacity: 0.9; margin: 8px 0 18px 0; color: var(--soft-gold); letter-spacing: 1px; }
+        .stat-banner { font-size: 0.7em; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 12px; font-family: 'Cinzel'; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 15px 0; }
+        .f-btn { padding: 12px 2px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; color: #fff; font-weight: bold; font-size: 0.7em; transition: all 0.4s ease; font-family: 'Cinzel'; text-shadow: 0 1px 2px #000; }
         .suggested { animation: suggested-glow 1.5s infinite ease-in-out; border: 2px solid var(--gold) !important; }
-        @keyframes suggested-glow { 0%, 100% { box-shadow: 0 0 5px var(--gold); transform: scale(1); } 50% { box-shadow: 0 0 20px var(--gold); transform: scale(1.05); } }
-        
-        input[type="date"] { padding: 12px; border: 1px solid var(--gold); background: rgba(0,0,0,0.6); color: var(--gold); border-radius: 10px; width: 220px; text-align: center; }
-        .calc-btn { background: var(--gold); color: #000; font-weight: bold; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; margin-top: 15px; }
-        
-        #faza-box { background: rgba(212, 175, 55, 0.1); padding: 20px; border-radius: 14px; border-left: 5px solid var(--gold); margin: 20px 0; display: none; text-align: left; }
-        .info-section { text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9em; border: 1px solid rgba(212, 175, 55, 0.15); }
-        .info-title { cursor: pointer; font-weight: bold; text-transform: uppercase; color: var(--gold); display: block; }
-        .info-content { display: none; margin-top: 12px; color: #eee; line-height: 1.5; }
-        
-        .stop { background: rgba(180, 0, 0, 0.7); color: white; width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; margin-top: 15px; display: none; font-weight: bold; }
-        .dl-btn { background: rgba(212, 175, 55, 0.1); color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 12px; cursor: pointer; margin-top: 30px; font-size: 0.75em; transition: 0.3s; font-weight: bold;}
-        .credits { color: var(--gold); font-size: 0.7em; margin-top: 20px; opacity: 0.8; letter-spacing: 2px; font-variant: small-caps; font-weight: bold; }
+        @keyframes suggested-glow { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--gold); } 50% { transform: scale(1.08); box-shadow: 0 0 35px var(--gold); } }
+        .breath-wrap { margin: 25px 0; display: none; }
+        .circle { width: 100px; height: 100px; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; }
+        #breath-text { font-family: 'Cinzel'; font-size: 0.75em; letter-spacing: 2px; color: var(--gold); font-weight: bold; }
+        @keyframes breathe { 0%, 100% { transform: scale(0.75); opacity: 0.5; } 50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 60px var(--gold); } }
+        .adj-btn { background: rgba(214, 175, 55, 0.1); border: 1px solid var(--gold); color: var(--gold); border-radius: 50%; width: 35px; height: 35px; cursor: pointer; font-weight: bold; font-size: 1.2em; display: flex; align-items: center; justify-content: center; }
+        input[type="date"] { padding: 8px; border: 1px solid var(--faza-color); background: rgba(0,0,0,0.4); color: var(--gold); border-radius: 10px; width: 160px; text-align: center; font-family: 'Quicksand'; outline: none; }
+        .calc-btn { background: var(--gold); color: #000; font-family: 'Cinzel'; font-weight: bold; padding: 12px 25px; border-radius: 15px; border: none; cursor: pointer; margin: 15px auto; width: 100%; max-width: 250px; letter-spacing: 1px; display: block; }
+        #faza-box { background: rgba(212, 175, 55, 0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(214, 175, 55, 0.2); margin: 20px 0; display: none; color: var(--soft-gold); }
+        .moon-row { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .moon-display { width: 60px; height: 60px; border-radius: 50%; position: relative; overflow: hidden; background: #000; border: 1px solid var(--gold); }
+        .moon-disk { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--gold); transition: all 1s ease; }
+        .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; border-top: 1px solid rgba(214, 175, 55, 0.2); border-bottom: 1px solid rgba(214, 175, 55, 0.2); padding: 15px 0; margin: 15px 0; }
+        .phase-item strong { font-size: 1.8em; font-family: 'Cinzel'; text-shadow: 0 0 10px var(--gold); }
+        .info-section { text-align: left; background: rgba(0,0,0,0.3); padding: 16px; border-radius: 15px; margin-top: 12px; font-size: 0.82em; border: 1px solid rgba(212, 175, 55, 0.1); width: 100%; }
+        .info-title { cursor: pointer; font-weight: bold; color: var(--gold); display: block; text-transform: uppercase; letter-spacing: 2px; font-family: 'Cinzel'; }
+        .info-content { display: none; margin-top: 12px; color: var(--soft-gold); opacity: 0.9; line-height: 1.6; }
+        .dl-btn { background: none; color: var(--gold); border: 1px solid var(--gold); padding: 6px 14px; border-radius: 10px; cursor: pointer; margin-top: 30px; font-family: 'Cinzel'; font-size: 0.65em; letter-spacing: 1px; opacity: 0.7; }
+        .karat-soft { font-family: 'Cinzel'; font-size: 0.55em; margin-top: 15px; opacity: 0.4; letter-spacing: 3px; color: var(--gold); }
     </style>
 </head>
-<body onload="checkSavedData()">
-
+<body onload="initApp()">
 <canvas id="particles"></canvas>
-
 <div class="box">
+    <div id="stat-banner" class="stat-banner">Total Mindfulness: 0 min</div>
     <h1>Monad Harmony</h1>
-    <div class="quote">"Everything is a number. Everything is resonance."</div>
+    <div class="quote">Find your rhythm. Heal your field. Master your Monad.</div>
     
-    <div class="timer-container">
-        <label>Session Duration:</label>
-        <div class="tempo-btns">
-            <button class="t-btn" id="dur5" onclick="setDuration(5)">5 min</button>
-            <button class="t-btn" id="dur10" onclick="setDuration(10)">10 min</button>
-            <button class="t-btn" id="dur20" onclick="setDuration(20)">20 min</button>
+    <!-- DURATION SELECTION -->
+    <div style="margin-bottom: 15px;">
+        <label style="font-size: 0.6em; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; opacity: 0.8;">Session Duration</label>
+        <div style="display: flex; justify-content: center; gap: 8px; margin-top: 5px;">
+            <button class="adj-btn" id="t5" onclick="setDur(5)" style="border-radius: 8px; width: 55px; font-size: 0.7em;">5m</button>
+            <button class="adj-btn" id="t10" onclick="setDur(10)" style="border-radius: 8px; width: 55px; font-size: 0.7em; background: var(--gold); color: #000;">10m</button>
+            <button class="adj-btn" id="t20" onclick="setDur(20)" style="border-radius: 8px; width: 55px; font-size: 0.7em;">20m</button>
         </div>
+    </div>
+
+    <div class="grid">
+        <button id="btn174" class="f-btn" style="background:#131325" onclick="igraj(174, '#050510')">174Hz</button>
+        <button id="btn285" class="f-btn" style="background:#251500" onclick="igraj(285, '#100800')">285Hz</button>
+        <button id="btn396" class="f-btn" style="background:#300000" onclick="igraj(396, '#150000')">396Hz</button>
+        <button id="btn417" class="f-btn" style="background:#301800" onclick="igraj(417, '#181000')">417Hz</button>
+        <button id="btn432" class="f-btn" style="background:#1a1a1a" onclick="igraj(432, '#0a0a0a')">432Hz</button>
+        <button id="btn528" class="f-btn" style="background:#002500" onclick="igraj(528, '#001000')">528Hz</button>
+        <button id="btn639" class="f-btn" style="background:#001a30" onclick="igraj(639, '#000815')">639Hz</button>
+        <button id="btn741" class="f-btn" style="background:#000025" onclick="igraj(741, '#00001a')">741Hz</button>
+        <button id="btn852" class="f-btn" style="background:#1a0030" onclick="igraj(852, '#10001a')">852Hz</button>
+        <button id="btn963" class="f-btn" style="background:#300030" onclick="igraj(963, '#1a001a')">963Hz</button>
     </div>
 
     <div class="breath-wrap" id="breathUI">
-        <div class="circle" id="mainCircle"><span id="breath-text">Inhale</span></div>
-        <div id="remaining-time" style="margin-top: 15px; font-size: 0.85em; font-weight: bold;"></div>
-        <div class="tempo-btns" id="tempoUI" style="margin-top:20px;">
-            <button class="t-btn" id="t8" onclick="setTempo(8)">RELAX (8s)</button>
-            <button class="t-btn" id="t10" onclick="setTempo(10)">HARMONY (10s)</button>
-            <button class="t-btn" id="t12" onclick="setTempo(12)">DEEP (12s)</button>
+        <div class="circle" id="mainCircle" style="width: 140px; height: 140px;">
+            <span id="breath-text" style="font-size: 1.2em; font-weight: bold; letter-spacing: 3px; text-shadow: 0 0 10px var(--gold);">VDIH</span>
+        </div>
+        <div id="remaining-time" style="margin-top: 15px; font-size: 0.9em; font-weight: bold; color: var(--gold); font-family: 'Cinzel';"></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:15px; align-items:center; margin: 20px 0;">
+        <div><label style="font-size:0.6em;color:var(--gold);letter-spacing:1px;">ORIGIN DATE</label>
+            <div style="display:flex;align-items:center;gap:10px;"><button class="adj-btn" onclick="adjDate('d1',-1)">-</button>
+            <input type="date" id="d1" value="1975-11-21" onchange="izracunajVse()"><button class="adj-btn" onclick="adjDate('d1',1)">+</button></div>
+        </div>
+        <div><label style="font-size:0.6em;color:var(--gold);letter-spacing:1px;">TARGET DATE</label>
+            <div style="display:flex;align-items:center;gap:10px;"><button class="adj-btn" onclick="adjDate('d2',-1)">-</button>
+            <input type="date" id="d2" onchange="izracunajVse()"><button class="adj-btn" onclick="adjDate('d2',1)">+</button></div>
         </div>
     </div>
 
-    <div id="afirmacija" style="font-style: italic; margin: 15px 0; min-height: 40px;">Select frequency or tune your bio-rhythm.</div>
-
-    <div class="grid">
-        <button id="btn174" class="f-btn" style="background:rgba(20,20,40,0.6)" onclick="igraj(174, 'Security and Peace.', '#050510')">174 Hz</button>
-        <button id="btn285" class="f-btn" style="background:rgba(60,40,0,0.6)" onclick="igraj(285, 'Field Restoration.', '#100800')">285 Hz</button>
-        <button id="btn396" class="f-btn" style="background:rgba(80,0,0,0.6)" onclick="igraj(396, 'Liberating Guilt/Fear.', '#150000')">396 Hz</button>
-        <button id="btn417" class="f-btn" style="background:rgba(90,50,0,0.6)" onclick="igraj(417, 'Facilitating Change.', '#181000')">417 Hz</button>
-        <button id="btn432" class="f-btn" style="background:rgba(40,40,40,0.6)" onclick="igraj(432, 'Natural Harmony.', '#0a0a0a')">432 Hz</button>
-        <button id="btn528" class="f-btn" style="background:rgba(0,60,0,0.6)" onclick="igraj(528, 'Transformation/Miracles.', '#001000')">528 Hz</button>
-        <button id="btn639" class="f-btn" style="background:rgba(0,50,80,0.6)" onclick="igraj(639, 'Relationships/Unity.', '#000815')">639 Hz</button>
-        <button id="btn741" class="f-btn" style="background:rgba(0,0,80,0.6)" onclick="igraj(741, 'Intuition/Expression.', '#000015')">741 Hz</button>
-        <button id="btn852" class="f-btn" style="background:rgba(60,0,100,0.6)" onclick="igraj(852, 'Spiritual Order.', '#100018')">852 Hz</button>
-        <button id="btn963" class="f-btn" style="background:rgba(100,0,100,0.6)" onclick="igraj(963, 'Divine Consciousness.', '#150015')">963 Hz</button>
-    </div>
-
-    <div style="margin: 20px 0;">
-        <input type="date" id="datum" value="1975-11-21">
-        <button class="calc-btn" onclick="izracunajVse()">TUNE ME</button>
-    </div>
-
+    <button class="calc-btn" onclick="izracunajVse()">COMPUTE RESONANCE</button>
     <div id="faza-box"></div>
 
     <div class="info-section">
-        <span class="info-title" onclick="toggleInfo('num-info')">▼ Bio-Cycle Numerology</span>
-        <div id="num-info" class="info-content">
-            Nature operates in cycles. Your <b>Bio-Phase</b> is based on the theosophical reduction of your birth date. We also track your <b>Renewal Count</b>—every full lunation (29.53 days) your body has experienced since birth.
+        <span class="info-title" onclick="toggleInfo('inf1')">▼ Bio-Resonance Principles</span>
+        <div id="inf1" class="info-content">
+            <b>Bio-Phase Calculation:</b> Pythagorean reduction maps your temporal existence into nine cycles. Each phase (1-9) represents a specific vibrational blueprint for cell-level alignment.
+            <br><br>
+            <b>Bio-faza:</b> Pitagorejska redukcija preslika vaš čas v devet ciklov. Vsaka faza (1-9) predstavlja specifičen vibracijski odtis za uglasitev na celičnem nivoju.
         </div>
     </div>
-
     <div class="info-section">
-        <span class="info-title" onclick="toggleInfo('about-app')">▼ About Monad Harmony</span>
-        <div id="about-app" class="info-content">
-            A sanctuary for body and spirit alignment using all 10 Solfeggio frequencies. Pair these tones with rhythmic breathing to return your bio-field to its original blueprint of harmony.
+        <span class="info-title" onclick="toggleInfo('inf2')">▼ Orbital Physics & 354-Day Cycle</span>
+        <div id="inf2" class="info-content">
+            <b>ELP-2000 Precision:</b> Unlike solar orbits, we track biological tides. A Lunar Year consists of 12 synodic months (354.36 days), providing a complete reset of internal fluid resonance.
+            <br><br>
+            <b>Orbitalna fizika:</b> Za razliko od sončnih koledarjev sledimo biološkim plimam. Lunarno leto (354,36 dni) predstavlja 12 sinodnih mesecev za popolno resetiranje telesne resonance.
         </div>
     </div>
 
-    <button id="stop-btn" class="stop" onclick="ustavi()">Stop Session</button>
+    <button id="stop-btn" style="background:#800;color:#fff;display:none;padding:10px;width:100%;margin-top:15px;border-radius:10px;border:none;cursor:pointer;font-family:'Cinzel';" onclick="ustavi()">STOP RESONANCE</button>
     <button class="dl-btn" onclick="downloadApp()">Download App</button>
-    <div class="credits">Karat Design Soft</div>
+    <div class="karat-soft">KARAT SOFT DESIGN</div>
 </div>
 
 <script>
-    let audioCtx, oscillator, gainNode, breathTimeout, countdownInterval;
-    let currentTempo = 10, sessionMinutes = 10;
+    let audioCtx, oscillator, gainNode, breathTimeout, countdownInterval, sessionMin = 10;
+    const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
+    const signs = [{n:"Aries",s:"♈"},{n:"Taurus",s:"♉"},{n:"Gemini",s:"♊"},{n:"Cancer",s:"♋"},{n:"Leo",s:"♌"},{n:"Virgo",s:"♍"},{n:"Libra",s:"♎"},{n:"Scorpio",s:"♏"},{n:"Sagittarius",s:"♐"},{n:"Capricorn",s:"♑"},{n:"Aquarius",s:"♒"},{n:"Pisces",s:"♓"}];
 
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
-        });
+    function initApp() { document.getElementById('d2').value = new Date().toISOString().split('T')[0]; izracunajVse(); loadStats(); }
+    function loadStats() { document.getElementById('stat-banner').innerText = `Total Mindfulness: ${localStorage.getItem('monad_total_min') || 0} min`; }
+    function setDur(m) { sessionMin = m; [5, 10, 20].forEach(v => { const b = document.getElementById('t'+v); b.style.background = (v==m)?'var(--gold)':'rgba(214,175,55,0.1)'; b.style.color = (v==m)?'#000':'var(--gold)'; }); }
+    function toggleInfo(id) { const el = document.getElementById(id); el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
+    function adjDate(id, delta) { const el = document.getElementById(id); let d = new Date(el.value); d.setDate(d.getDate() + delta); el.value = d.toISOString().split('T')[0]; izracunajVse(); }
+
+    function playBell() {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.frequency.setValueAtTime(523, audioCtx.currentTime); g.gain.setValueAtTime(0, audioCtx.currentTime);
+        g.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.1); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 4);
+        o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + 4);
     }
 
-    function checkSavedData() {
-        const d = localStorage.getItem('monad_date');
-        if(d) { document.getElementById('datum').value = d; izracunajVse(); }
-        setDuration(10);
-    }
-
-    function setDuration(m) {
-        sessionMinutes = m;
-        document.querySelectorAll('.timer-container .t-btn').forEach(b => b.classList.remove('active'));
-        const b = document.getElementById('dur' + m); if(b) b.classList.add('active');
-    }
-
-    function toggleInfo(id) {
-        const el = document.getElementById(id);
-        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function igraj(freq, msg, bg) {
+    function igraj(f, bg) {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        ustavi();
-        oscillator = audioCtx.createOscillator();
-        gainNode = audioCtx.createGain();
-        oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        ustavi(); oscillator = audioCtx.createOscillator(); gainNode = audioCtx.createGain();
+        oscillator.frequency.setValueAtTime(f, audioCtx.currentTime); gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
         gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
-        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
-        oscillator.start();
-        document.getElementById('afirmacija').innerText = msg;
-        document.getElementById('breathUI').style.display = 'block';
-        document.getElementById('stop-btn').style.display = 'block';
-        document.body.style.background = bg;
-        setTempo(currentTempo);
-        let timeLeft = sessionMinutes * 60;
-        countdownInterval = setInterval(() => {
-            timeLeft--;
-            let m = Math.floor(timeLeft/60), s = timeLeft%60;
-            document.getElementById('remaining-time').innerText = `Remaining: ${m}:${s.toString().padStart(2,'0')}`;
-            if(timeLeft <= 0) { ustavi(); playBell(); }
+        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination); oscillator.start();
+        document.getElementById('breathUI').style.display='block'; document.getElementById('stop-btn').style.display='block';
+        document.body.style.background = bg; document.getElementById('mainCircle').style.animation = "breathe 10s infinite ease-in-out";
+        const t = document.getElementById('breath-text');
+        function loop() { t.innerText = "INHALA"; breathTimeout = setTimeout(() => { t.innerText = "EXHALA"; breathTimeout = setTimeout(loop, 5000); }, 5000); }
+        loop();
+        let sLeft = sessionMin * 60; countdownInterval = setInterval(() => {
+            sLeft--; let m=Math.floor(sLeft/60), s=sLeft%60;
+            document.getElementById('remaining-time').innerText = `RESONANCE: ${m}:${s.toString().padStart(2,'0')}`;
+            if(sLeft<=0) { localStorage.setItem('monad_total_min', parseInt(localStorage.getItem('monad_total_min')||0)+sessionMin); loadStats(); playBell(); ustavi(); }
         }, 1000);
     }
 
-    function setTempo(s) {
-        currentTempo = s;
-        const c = document.getElementById('mainCircle'), t = document.getElementById('breath-text');
-        document.querySelectorAll('#tempoUI .t-btn').forEach(b => b.classList.remove('active'));
-        const btn = document.getElementById('t' + s); if(btn) btn.classList.add('active');
-        
-        c.style.animation = 'none'; c.offsetHeight; 
-        c.style.animation = `breathe ${s}s infinite ease-in-out`;
-        
-        clearTimeout(breathTimeout);
-        function loopBreath() {
-            t.innerText = "Inhale";
-            // Correct synchronization: text changes to Exhale at exactly half cycle
-            breathTimeout = setTimeout(() => {
-                t.innerText = "Exhale";
-                breathTimeout = setTimeout(loopBreath, (s/2) * 1000);
-            }, (s/2) * 1000);
-        }
-        loopBreath();
+    function ustavi() { if(oscillator){ gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime+0.3); setTimeout(() => { try{oscillator.stop();}catch(e){} }, 350); oscillator=null; } clearInterval(countdownInterval); clearTimeout(breathTimeout); document.getElementById('breathUI').style.display='none'; document.getElementById('stop-btn').style.display='none'; document.body.style.background="#05070a"; }
+
+    function getMoon(date) {
+        let jd = (date.getTime()/86400000)+2440587.5; let T = (jd-2451545.0)/36525;
+        let L = (218.316+481267.881*T)%360, M = (134.963+477198.867*T)%360, D = (297.85+445267.11*T)%360;
+        let lon = (L + 6.28*Math.sin(M*Math.PI/180))%360; if(lon<0) lon+=360;
+        return { p: Math.round(0.5*(1-Math.cos(D*Math.PI/180))*100), n: (D%360)/360, sign: signs[Math.floor(lon/30)], deg: Math.floor(lon%30) };
     }
 
-    function ustavi() {
-        if(oscillator) {
-            gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
-            setTimeout(() => { try { oscillator.stop(); } catch(e){} }, 500);
-            oscillator = null;
-        }
-        clearTimeout(breathTimeout); clearInterval(countdownInterval);
-        document.getElementById('breathUI').style.display = 'none';
-        document.getElementById('stop-btn').style.display = 'none';
-        document.body.style.background = "#05070a";
-    }
+    function red(d) { let s = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0); while(s>9) s = s.toString().split('').reduce((a,b)=>a+parseInt(b),0); return s; }
 
     function izracunajVse() {
-        const d = document.getElementById('datum').value; if(!d) return;
-        localStorage.setItem('monad_date', d);
-        let st = d.replace(/-/g,'').split('').reduce((a,b)=>a+parseInt(b),0);
-        while(st > 9) st = st.toString().split('').reduce((a,b)=>a+parseInt(b),0);
-
-        const now = new Date();
-        const LUNAR_MONTH = 29.530588853; 
-        const jdNow = (now.getTime() / 86400000) + 2440587.5;
-        const normProgress = ((jdNow - 2451550.1) / LUNAR_MONTH) % 1;
-        const p = normProgress < 0 ? normProgress + 1 : normProgress;
-        const illumination = Math.abs(p - 0.5) * 2; 
-        const percentLit = Math.round((1 - illumination) * 100);
-
-        const birth = new Date(d);
-        const diffDays = Math.floor((now - birth) / (1000*60*60*24));
-        const fazaBox = document.getElementById('faza-box');
-        fazaBox.style.display = 'block';
-        fazaBox.innerHTML = `
-            <div style="display:flex; align-items:center; gap:15px; border-bottom:1px solid var(--faza-color); padding-bottom:10px; margin-bottom:10px;">
-                <div class="moon-display"><div class="moon-disk" style="left: ${(p < 0.5 ? (100-percentLit) : -(100-percentLit))}%"></div></div>
-                <div><strong style="color:#fff;">SKY LUNA: ${percentLit}%</strong><br><span style="font-size:0.8em;">Current Illumination</span></div>
+        const t1=document.getElementById('d1').value, t2=document.getElementById('d2').value; if(!t1||!t2) return;
+        const start=new Date(t1), end=new Date(t2), diffDays=Math.floor((end-start)/86400000);
+        const moon1=getMoon(start), moon2=getMoon(end), st1=red(t1), st2=red(t2), next=354-(diffDays%354<0?(diffDays%354)+354:diffDays%354);
+        const fBox = document.getElementById('faza-box'); fBox.style.display='block';
+        fBox.innerHTML = `
+            <div class="moon-row">
+                <div class="moon-display"><div class="moon-disk" style="left:${(moon1.n < 0.5 ? (100-moon1.p) : -(100-moon1.p))}%"></div></div>
+                <div style="font-family:'Cinzel';color:var(--gold);font-size:1em;">ORIGIN MOON: ${moon1.p}% • ${moon1.sign.s} ${moon1.deg}°</div>
+                <div style="font-family:'Cinzel';color:var(--soft-gold);font-size:0.85em;opacity:0.7;">TARGET MOON: ${moon2.p}% • ${moon2.sign.s} ${moon2.deg}°</div>
             </div>
-            <strong>BIO-PHASE: ${st}</strong><br>
-            Total Days Lived: ${diffDays.toLocaleString()}<br>
-            Lunar Age: ${(diffDays / 354.36).toFixed(2)} years<br>
-            Renewal Count: ${(diffDays/29.53).toFixed(2)} lunations
-        `;
+            <div class="phase-grid">
+                <div class="phase-item"><strong style="display:block;margin-bottom:15px;">${st1}</strong><small>Origin Phase</small></div>
+                <div class="phase-item"><strong style="display:block;margin-bottom:15px;">${st2}</strong><small>Target Phase</small></div>
+            </div>
+            <div style="font-size:0.8em;font-family:'Cinzel';line-height:1.8;">
+                • ${diffDays.toLocaleString()} DAYS • ${(diffDays/29.53).toFixed(2)} LUNATIONS • ${(diffDays/354.36).toFixed(2)} LUNAR YEARS •
+                <br><span style="color:var(--gold);">NEXT CYCLE IN: ${next} DAYS</span>
+            </div>`;
         document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('suggested'));
-        const frqs = [174, 285, 396, 417, 432, 528, 639, 741, 852, 963];
-        const closest = frqs.reduce((prev, curr) => Math.abs(curr - (st * 100)) < Math.abs(prev - (st * 100)) ? curr : prev);
-        const target = document.getElementById('btn' + closest);
-        if(target) target.classList.add('suggested');
+        const target = frqs.reduce((p,c)=>Math.abs(c-(st1*100))<Math.abs(p-(st1*100))?c:p);
+        const btn = document.getElementById('btn'+target); if(btn) btn.classList.add('suggested');
     }
-
-    function downloadApp() {
-        const html = document.documentElement.outerHTML;
-        const blob = new Blob([html], {type: 'text/html'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'monad-harmony.html';
-        a.click();
-    }
-
-    function playBell() {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const o = ctx.createOscillator(), g = ctx.createGain();
-        o.frequency.setValueAtTime(150, ctx.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
-        o.connect(g); g.connect(ctx.destination);
-        o.start(); o.stop(ctx.currentTime + 3);
-    }
-
-    const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let ps = []; for(let i=0; i<50; i++) ps.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5, v: Math.random()*0.3});
-    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-    function anim() {
-        ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(214,175,55,0.2)";
-        ps.forEach(p => { p.y -= p.v; if(p.y<0) p.y=canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); });
-        requestAnimationFrame(anim);
-    } anim();
+    function downloadApp() { const b=new Blob([document.documentElement.outerHTML],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='monad-harmony.html'; a.click(); }
+    const canvas=document.getElementById('particles'), ctx=canvas.getContext('2d'); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    let ps=[]; for(let i=0;i<60;i++) ps.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,v:Math.random()*0.2});
+    function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="rgba(214,175,55,0.25)"; ps.forEach(p=>{p.y-=p.v; if(p.y<0)p.y=canvas.height; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();}); requestAnimationFrame(anim); } anim();
 </script>
 </body>
 </html>
